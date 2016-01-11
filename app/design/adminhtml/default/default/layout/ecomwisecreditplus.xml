@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_credit_rules_index>
+        <reference name="content">
+            <block type="ecomwisecreditplus/credit_rules" name="credit_rules" />
+        </reference>
+    </adminhtml_credit_rules_index>    
+    <adminhtml_credit_rules_edit>
+        <!-- <update handle="editor"/>
+        <reference name="content">
+            <block type="ecomwisecreditplus/adminhtml_rules_edit" name="credit.limit.edit"  />
+        </reference> -->        
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+        <reference name="left">
+            <block type="ecomwisecreditplus/credit_rules_edit_tabs" name="credit_limit_edit_tabs">
+                <block type="ecomwisecreditplus/credit_rules_edit_tab_main" name="credit_limit_edit_tab_main"/>
+                <block type="ecomwisecreditplus/credit_rules_edit_tab_customers" name="credit_limit_edit_tab_customers">                
+                	<block type="adminhtml/widget_grid_serializer" name="upsell_grid_serializer">
+		                <action method="initSerializerBlock">
+		                    <grid_block_name>customersGrid</grid_block_name>
+		                    <data_callback>getSelected</data_callback>
+		                    <hidden_input_name>customer_ids</hidden_input_name>
+		                    <reload_param_name>customers</reload_param_name>
+		                </action>
+		            </block>                
+                </block>                
+                <action method="addTab"><name>main_section</name><block>credit_limit_edit_tab_main</block></action>
+                <action method="addTab"><name>customers_section</name><block>credit_limit_edit_tab_customers</block></action>
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="ecomwisecreditplus/credit_rules_edit" name="credit_limit_edit"/>            
+        </reference>
+        <!-- <reference name="js">
+            <block type="ecomwisecreditplus/credit_rules_edit_js" template="promo/js.phtml" />
+        </reference> -->       
+    </adminhtml_credit_rules_edit>    
+    
+    <adminhtml_credit_rules_new>
+        <!-- <update handle="editor"/>
+        <reference name="content">
+            <block type="ecomwisecreditplus/adminhtml_rules_edit" name="credit.limit.edit"  />
+        </reference> -->        
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+        <reference name="left">
+            <block type="ecomwisecreditplus/credit_rules_edit_tabs" name="credit_limit_edit_tabs">
+                <block type="ecomwisecreditplus/credit_rules_edit_tab_main" name="credit_limit_edit_tab_main"/>
+                <block type="ecomwisecreditplus/credit_rules_edit_tab_customers" name="credit_limit_edit_tab_customers">                
+                	<block type="adminhtml/widget_grid_serializer" name="upsell_grid_serializer">
+		                <action method="initSerializerBlock">
+		                    <grid_block_name>customersGrid</grid_block_name>
+		                    <data_callback>getSelected</data_callback>
+		                    <hidden_input_name>customer_ids</hidden_input_name>
+		                    <reload_param_name>customers</reload_param_name>
+		                </action>
+		            </block>               
+                </block>                                
+                <!-- <block type="adminhtml/promo_catalog_edit_tab_actions" name="promo_catalog_edit_tab_actions"/> -->
+                <action method="addTab"><name>main_section</name><block>credit_limit_edit_tab_main</block></action>
+                <action method="addTab"><name>customers_section</name><block>credit_limit_edit_tab_customers</block></action>
+                <!-- <action method="addTab"><name>actions_section</name><block>promo_catalog_edit_tab_actions</block></action> -->
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="ecomwisecreditplus/credit_rules_edit" name="credit_limit_edit"/>
+        </reference>
+        <!-- <reference name="js">
+            <block type="ecomwisecreditplus/credit_rules_edit_js" template="promo/js.phtml" />
+        </reference> -->        
+    </adminhtml_credit_rules_new>     
+    
+    <adminhtml_customer_edit>
+		<reference name="customer_edit_tabs">
+	    	<action method="addTab">
+	        	<name>credit_limit_customer_edit_tab_limits</name>
+	        	<block>ecomwisecreditplus/adminhtml_customer_edit_tab_limits</block>
+	    	</action>
+	   </reference>
+  </adminhtml_customer_edit>    
+      
+</layout>

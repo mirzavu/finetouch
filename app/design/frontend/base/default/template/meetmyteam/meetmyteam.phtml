@@ -1,0 +1,44 @@
+<span class="myteam-head">
+<h4>
+	<?php echo $this->__('My Team') ?>
+</h4>
+</span>
+<?php 
+$collection = $this->getAllMembers();
+
+$size = $collection->getSize();
+
+if($size>0){
+?>
+<div>
+<ul class="leader_not"> 
+<?php
+$url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+	foreach ($collection as $item) {
+		$i = $i+1;
+//$detailUrl = Mage::getUrl('meetmyteam/index/detail',array('id'=>$item->getId(),'cat_id'=>$item->getCategory()));
+$detailUrl = Mage::getUrl('meetmyteam/index/detail',array('id'=>$item->getId()));
+?>
+
+<li><span class="photo_section">       
+	<a href="<?php echo $detailUrl; ?>"> <img height="170" width="150" border="0" title="<?php echo $item->getTitle(); ?>" alt="<?php echo $item->getTitle(); ?>" src="<?php echo $url.'media'.DS.$item->getFilename(); ?>"> </a>
+         </span> 
+
+ <div class="title">
+<?php echo $item->getTitle(); ?>
+</div> 
+
+<div class="sub-heading"><?php echo $item->getDescription(); ?></div> 
+
+<div class="full-bio"><a href="<?php echo $detailUrl; ?>" class="links">View bio</a></div>
+</li>
+
+			
+<?php
+}
+echo "</ul></div>";
+}else{
+	echo "No any member in this group.";
+}
+
+

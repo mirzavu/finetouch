@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+	<checkout_onepage_paymentmethod>
+		<!-- <remove name="root"/> -->
+		<block type="ecomwisecreditplus/payment_methods" name="checkout.onepage.ecomwisecreditplus.message" output="toHtml"  template="ecomwisecreditplus/payment/methods.phtml">
+			<action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+        </block>				
+	</checkout_onepage_paymentmethod> 	
+	<customer_account>
+		<reference name="customer_account_navigation">
+			<action method="addLink" translate="label" module="ecomwisecreditplus"><name>credit_limit</name><path>credit/account/index</path><label>Credit Limit</label></action>
+		</reference>
+	</customer_account>	
+	<ecomwisecreditplus_account_index>	
+		<label>Credi Limits</label>		
+		<update handle="customer_account" />	
+		<reference name="my.account.wrapper">
+			<block type="ecomwisecreditplus/account_limits" name="ecomwisecreditplus.account.limits" as="ecomwisecreditplus_account_limits" template="ecomwisecreditplus/account/limits.phtml" />
+		</reference>	
+	</ecomwisecreditplus_account_index>		
+	<default> 		
+		<reference name="head">
+			<action method="addItem"><type>skin_css</type><name>ecomwisecreditplus/css/style.css</name></action>
+		</reference>				
+		<reference name="after_body_start">			
+			<block type="ecomwisecreditplus/account_limits" name="ecomwisecreditplus.limits.top" template="ecomwisecreditplus/header/limits.phtml"/>
+		</reference>
+  	</default> 	
+</layout>

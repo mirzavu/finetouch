@@ -1,0 +1,39 @@
+<div class="b2borderlist-bundle-options">
+
+	<?php $_product = $this->getProduct(); ?>
+	<?php $product_view = $this->getlayout()->createBlock("catalog/product_view")?>
+	
+	<script type="text/javascript">
+	    var optionsPrice = new Product.OptionsPrice(<?php echo $product_view->getJsonConfig() ?>);
+	</script>
+	
+	
+	<?php $_options = Mage::helper('core')->decorateArray($this->getOptions()); ?>
+	<?php if ($_product->isSaleable()):?>
+	    <?php if (count($_options)): ?>
+	        <dl>
+	        <?php foreach ($_options as $_option): ?>
+	        <?php //  Zend_debug::dump($_option->getData()); ?>
+	            <?php if (!$_option->getSelections()): ?>
+	                <?php continue; ?>
+	            <?php endif;?>
+	       
+	            <?php echo $this->getOptionHtml($_option) ?>
+	        <?php endforeach; ?>
+	        </dl>
+	    <?php else: ?>
+	        <p><?php echo $this->__('No options of this product are available.') ?></p>
+	    <?php endif; ?>
+	<?php endif;?>
+	
+	<?php  //echo $this->getJsonConfig()."<br/>"?>
+	<script type="text/javascript">
+	        //<![CDATA[
+	        var bundle_<?php echo $_product->getId();?> = new B2BOrderlist_BundleProduct.Bundle(<?php echo $this->getJsonConfig() ?>);
+	        var taxCalcMethod = "<?php echo Mage::helper('tax')->getConfig()->getAlgorithm($_product->getStore()) ?>";
+	        var CACL_UNIT_BASE = "<?php echo Mage_Tax_Model_Calculation::CALC_UNIT_BASE ?>";
+	        var CACL_ROW_BASE = "<?php echo Mage_Tax_Model_Calculation::CALC_ROW_BASE ?>";
+	        var CACL_TOTAL_BASE = "<?php echo Mage_Tax_Model_Calculation::CALC_TOTAL_BASE ?>";
+	        //]]>
+ </script>
+</div>

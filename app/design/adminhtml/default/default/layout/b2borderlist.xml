@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <layout version="0.1.0">  
+   <adminhtml_system_config_edit>
+   	<reference name="head">
+   		<action method="addJs"><script>b2borderlist/validation.js</script></action>
+   	</reference>
+   </adminhtml_system_config_edit>  
+   <adminhtml_customerrule_individual>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="b2borderlist/adminhtml_tabs_customergrid" name="promo.rule.individual.customers"/>
+            <block type="adminhtml/widget_grid_serializer" name="individual_customers_grid_serializer">
+                <reference name="individual_customers_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>promo.rule.individual.customers</grid_block_name>
+                        <data_callback>getSelectedRuleCustomers</data_callback>
+                        <hidden_input_name>rule_customers</hidden_input_name>
+                        <reload_param_name>rule_customers</reload_param_name>
+                    </action>
+                   
+                </reference>
+            </block>
+        </block>
+    </adminhtml_customerrule_individual> 
+    
+    <adminhtml_customerrule_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="b2borderlist/adminhtml_tabs_customergrid" name="promo.rule.individual.customers"/>
+        </block>
+    </adminhtml_customerrule_grid>
+ </layout>

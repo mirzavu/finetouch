@@ -1,0 +1,108 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+
+<!DOCTYPE html>
+
+<!--[if lt IE 7 ]> <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js"> <!--<![endif]-->
+
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/inner_styles.css" type="text/css" />
+
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/bootstrap.min.css" type="text/css" />
+<script src="<?php echo $this->getSkinUrl(); ?>js/bootstrap.min.js"></script>
+<script>
+    jQuery(document).ready(function() {
+      jQuery("#owl-demo").owlCarousel({
+        navigation : false
+      });
+    });	 
+</script>
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header') ?>
+        <div class="container innerpage about">
+            <div class="main" style="padding:0 15px;"> 
+ 		    <?php echo $this->getChildHtml('breadcrumbs') ?>
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php echo $this->getChildHtml('content') ?>
+             </div>
+        </div>
+	<?php //echo $this->getLayout()->createBlock('manageteam/index')->setTemplate('manageteam/index.phtml')->toHtml(); ?>
+   <div class="sponsors">
+   <div class="container">
+    <h3>Our Sponsors</h3>
+    <div class="row">
+          <div class="col-xs-6 col-sm-4 col-md-2"><img src="<?php echo $this->getSkinUrl(); ?>images/sponsor1.jpg" width="164" height="69" alt="Sponsor1" /></div>
+          <div class="col-xs-6 col-sm-4 col-md-2"><img src="<?php echo $this->getSkinUrl(); ?>images/sponsor1.jpg" width="164" height="69" alt="Sponsor1" /></div>
+          <div class="col-xs-6 col-sm-4 col-md-2"><img src="<?php echo $this->getSkinUrl(); ?>images/sponsor1.jpg" width="164" height="69" alt="Sponsor1" /></div>
+          <div class="col-xs-6 col-sm-4 col-md-2"><img src="<?php echo $this->getSkinUrl(); ?>images/sponsor1.jpg" width="164" height="69" alt="Sponsor1" /></div>
+          <div class="col-xs-6 col-sm-4 col-md-2"><img src="<?php echo $this->getSkinUrl(); ?>images/sponsor1.jpg" width="164" height="69" alt="Sponsor1" /></div>
+          <div class="col-xs-6 col-sm-4 col-md-2"><img src="<?php echo $this->getSkinUrl(); ?>images/sponsor1.jpg" width="164" height="69" alt="Sponsor1" /></div>
+        </div>
+    <!--<div class="all_sponsors">
+         </div>-->
+  </div>
+    </div>
+
+      <div class="main-container-btm">
+		 <div class="main-container-layout about-us">
+         <div class="col-45 ft_left home-video">
+		 <h2>Latest Video <a href="#">VIEW MORE</a></h2>
+		 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homevideo')->toHtml();?></div>
+         <div class="col-50 ft_right home-press">
+		 <h2>Quality Assurance</h2>
+		 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('quality-assurance')->toHtml();?>
+		 </div>		 
+		</div>
+		
+		</div>
+
+        <?php echo $this->getChildHtml('footer_before') ?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>
+

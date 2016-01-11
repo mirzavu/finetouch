@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<config>
+	  <tabs>
+		<hetinfoway translate="label" module="video">
+            <label>Het Infoway</label>
+            <sort_order>0</sort_order>
+        </hetinfoway>
+	  </tabs>
+	  <sections>
+		<hetinfoway_video  translate="label" module="video">                    
+		<label>Video Configuration</label>
+		<tab>hetinfoway</tab>
+		<frontend_type>text</frontend_type>
+		<sort_order>0</sort_order>
+		<show_in_default>1</show_in_default>
+		<show_in_website>1</show_in_website>
+		<show_in_store>1</show_in_store>            
+					<groups>
+						<readme translate="label">
+							<label>Information about Het Infoway</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>-1</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<fields>
+								<information>
+									<label>About Company</label>
+									<comment>
+										<![CDATA[The Best Website Design, Web Application Development , web solutions Company backed by a team of creative and experienced web designers, web developers. Website: <a href="http://www.hetinfoway.in" target="_blank">Het Infoway</a> ]]>
+									</comment>
+									<frontend_type>label</frontend_type>
+									<sort_order>1</sort_order>
+									<show_in_default>1</show_in_default>
+									<show_in_website>1</show_in_website>
+									<show_in_store>1</show_in_store>
+								</information>
+							</fields>
+						</readme>
+				      <hetinfoway_vgroup translate="label"> 
+					  <label>Video Setting</label>
+					  <frontend_type>text</frontend_type>
+					  <sort_order>0</sort_order>
+					  <show_in_default>1</show_in_default>
+					  <show_in_website>1</show_in_website>
+					  <show_in_store>1</show_in_store>
+				       <fields>
+                          <youtubeplaylist translate="label">
+                            <label>Youtube Playlist URL</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>only put your playlist id e.g. acyz6K78GqrYmJAFjmZ3, Note: remove PL from beginning</comment>
+                          </youtubeplaylist>
+						  <page_url translate="label">
+                            <label>Page url</label>
+							<frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                          </page_url>
+                          <width translate="label">
+                            <label>Width</label>
+							<frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                          </width>
+                          <height translate="label">
+                            <label>Height</label>
+							<frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                          </height>
+						  <video_enable translate="label">
+                            <label>Enabled: </label>
+                            <comment>Make extension enabled Yes/No</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                          </video_enable>
+                          <video_cat_per_page translate="label">
+                            <label>Categories per Page Allowed Values: </label>
+                            <comment>Comma-separated. And default value is 10,20,30</comment>
+                            <frontend_type>text</frontend_type>
+							<validate>validate-per-page-value-list</validate>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </video_cat_per_page>
+                        <video_item_per_page translate="label">
+                            <label>Video per Page on Grid Allowed Values: </label>
+                            <comment>Comma-separated. And default value is 10,20,30</comment>
+                            <frontend_type>text</frontend_type>
+							<validate>validate-per-page-value-list</validate>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </video_item_per_page>	
+					   </fields>
+					   </hetinfoway_vgroup>
+					</groups>
+		</hetinfoway_video>
+	  </sections>
+</config>

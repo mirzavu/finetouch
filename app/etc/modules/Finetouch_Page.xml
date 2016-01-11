@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+       	<Finetouch_Page>
+        	<active>true</active>
+        	<codepool>local</codepool>
+       	</Finetouch_Page>
+    </modules>
+    <!-- Putting this here because it doesn't seem to work in the config.xml -->
+    <global>
+        <page>
+            <layouts>
+                <home module="page" translate="label">
+                    <label>Home</label>
+                    <template>page/home.phtml</template>
+                    <layout_handle>page_home</layout_handle>
+                </home>
+				<contact_layout module="page" translate="label">
+                    <label>Contact Us</label>
+                    <template>page/contact.phtml</template>
+                    <layout_handle>contact_layout</layout_handle>
+                </contact_layout>
+				<about_layout module="page" translate="label">
+                    <label>About Us</label>
+                    <template>page/about.phtml</template>
+                    <layout_handle>about_layout</layout_handle>
+                </about_layout>
+            </layouts>
+        </page>
+    </global>
+</config>

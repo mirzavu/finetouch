@@ -1,0 +1,77 @@
+<?php $category = $this->getCategory(); ?>
+<?php
+// get breadcrumbs block
+$breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+// add first item with link
+$breadcrumbs->addCrumb(
+'home',
+ array(
+'label'=>$this->__('Home'),
+'title'=>$this->__('Home'),
+'link'=>Mage::getUrl('meetmyteam')
+)
+);
+
+// add third item without link
+$breadcrumbs->addCrumb(
+'unlink',
+ array(
+'label'=>$this->__($category->getTitle()),
+'title'=>$this->__($category->getTitle()),
+)
+);
+echo $breadcrumbs->toHtml();
+?>
+
+<div class="page-title">
+<h1>
+	<?php echo $this->__($category->getTitle());
+	 ?>
+</h1>
+</div>
+<?php echo $this->__($category->getDescription()) ?>
+
+<br/>
+
+<?php 
+$collection = Mage::getModel('meetmyteam/meetmyteam')->getCollection();
+$collection->addFieldToFilter('status',Array('eq'=>1));
+$collection->addFieldToFilter('category',Array('eq'=>$category->getId()));
+
+$size = $collection->getSize();
+
+if($size>0){
+?>
+<div>
+<ul class="leader_not"> 
+<?php
+$url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+$i = 0;
+	foreach ($collection as $item) {
+		$i = $i+1;
+//$detailUrl = Mage::getUrl('meetmyteam/index/detail',array('id'=>$item->getId(),'cat_id'=>$item->getCategory()));
+$detailUrl = Mage::getUrl('meetmyteam/index/detail',array('id'=>$item->getId()));
+?>
+
+<li><span class="photo_section">        
+<a href="<?php echo $detailUrl; ?>"> <img height="170" width="150" border="0" title="<?php echo $item->getTitle(); ?>" alt="<?php echo $item->getTitle(); ?>" src="<?php echo $url.'media'.DS.$item->getFilename(); ?>"> </a>
+   </span> 
+
+ <div class="title">
+<?php echo $item->getTitle(); ?>
+</div> 
+
+<div class="sub-heading"><?php echo $item->getDescription(); ?></div> 
+
+<div class="full-bio"><a href="<?php echo $detailUrl; ?>" class="links">View bio</a></div>
+</li>
+
+	
+<?php
+}
+echo "</ul></div>";
+}else{
+	echo "No any member in this group.";
+}
+
+

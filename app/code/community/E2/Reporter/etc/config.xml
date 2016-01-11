@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+      <E2_Reporter>
+          <version>1.0.2</version>
+      </E2_Reporter>
+  </modules>
+  <global>
+    <models>
+      <e2_reporter>
+          <class>E2_Reporter_Model</class>
+          <resourceModel>e2_reporter_mysql4</resourceModel>
+      </e2_reporter>
+      <e2_reporter_mysql4>
+          <class>E2_Reporter_Model_Mysql4</class>
+          <entities>
+            <report><table>e2_reporter_reports</table></report>
+          </entities>
+      </e2_reporter_mysql4>
+    </models>
+    <resources>
+      <e2_reporter_setup>
+        <setup>
+          <module>E2_Reporter</module>
+        </setup>
+      </e2_reporter_setup>
+    </resources>
+    <helpers>
+      <e2_reporter>
+        <class>E2_Reporter_Helper</class>
+      </e2_reporter>
+    </helpers>
+  </global>
+  <crontab>
+    <jobs>
+      <e2_reporter>
+        <schedule><cron_expr>*/5 * * * *</cron_expr></schedule>
+        <run><model>e2_reporter/cron::run</model></run>
+      </e2_reporter>
+    </jobs>
+  </crontab>
+  <default>
+    <e2>
+      <reporter>
+        <notification_email></notification_email>
+      </reporter>
+    </e2>
+  </default>
+
+  <adminhtml>
+    <acl>
+      <resources>
+        <admin>
+          <children>
+            <system>
+              <children>
+                <config>
+                  <children>
+                    <e2>
+                      <title>E2-specific configuration options</title>
+                    </e2>
+                  </children>
+                </config>
+              </children>
+            </system>
+          </children>
+        </admin>
+      </resources>
+    </acl>
+  </adminhtml>
+
+
+  <frontend>
+    <routers>
+        <e2_reporter>
+            <use>standard</use>
+            <args>
+                <module>E2_Reporter</module>
+                <frontName>reporter</frontName>
+            </args>
+        </e2_reporter>
+    </routers>
+  </frontend>
+
+</config>

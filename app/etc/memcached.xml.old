@@ -1,0 +1,28 @@
+<config>
+  <global>
+    <cache>
+      <backend>memcached</backend>
+      <slow_backend>database</slow_backend>
+      <fast_backend>Memcached</fast_backend>
+      <fast_backend_options>
+        <servers>
+          <server>
+            <host>unix:///home/www.finetouch.co.nz/.memcached/memcached.sock</host>
+            <port>0</port>
+            <persistent>0</persistent>
+          </server>
+        </servers>
+      </fast_backend_options>
+
+      <memcached>
+        <servers>
+          <server>
+            <host>unix:///home/www.finetouch.co.nz/.memcached/memcached.sock</host>
+            <port>0</port>
+            <persistent>0</persistent>
+          </server>
+        </servers>
+      </memcached>
+    </cache>
+  </global>
+</config>

@@ -1,0 +1,999 @@
+/**
+ * BxSlider v4.1.2 - Fully loaded, responsive content slider
+ * http://bxslider.com
+ *
+ * Written by: Steven Wanderski, 2014
+ * http://stevenwanderski.com
+ * (while drinking Belgian ales and listening to jazz)
+ *
+ * CEO and founder of bxCreative, LTD
+ * http://bxcreative.com
+ */
+
+
+/** RESET AND LAYOUT
+===================================*/
+
+.bx-wrapper {
+	position: relative;
+	margin: 0 auto 60px;
+	padding: 0;
+	*zoom: 1;
+}
+
+.bx-wrapper img {
+	max-width: 100%;
+	display: block;
+}
+
+/** THEME
+===================================*/
+
+.bx-wrapper .bx-viewport {
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	border:  5px solid #fff;
+	left: -5px;
+	background: #fff;
+	
+	/*fix other elements on the page moving (on Chrome)*/
+	-webkit-transform: translatez(0);
+	-moz-transform: translatez(0);
+    	-ms-transform: translatez(0);
+    	-o-transform: translatez(0);
+    	transform: translatez(0);
+}
+
+.bx-wrapper .bx-pager,
+.bx-wrapper .bx-controls-auto {
+	position: absolute;
+	bottom: -30px;
+	width: 100%;
+}
+
+/* LOADER */
+
+.bx-wrapper .bx-loading {
+	min-height: 50px;
+	background: url(http://localhost/finetouch/skin/frontend/finetouch/default/css/images/bx_loader.gif) center center no-repeat #fff;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2000;
+}
+
+/* PAGER */
+
+.bx-wrapper .bx-pager {
+	text-align: center;
+	font-size: .85em;
+	font-family: Arial;
+	font-weight: bold;
+	color: #666;
+	padding-top: 20px;
+}
+
+.bx-wrapper .bx-pager .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+	display: inline-block;
+	*zoom: 1;
+	*display: inline;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+	background: #666;
+	text-indent: -9999px;
+	display: block;
+	width: 10px;
+	height: 10px;
+	margin: 0 5px;
+	outline: 0;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+	background: #000;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+
+.bx-wrapper .bx-prev {
+	left: 10px;
+	background: url(http://localhost/finetouch/skin/frontend/finetouch/default/css/images/controls.png) no-repeat 0 -32px;
+}
+
+.bx-wrapper .bx-next {
+	right: 10px;
+	background: url(http://localhost/finetouch/skin/frontend/finetouch/default/css/images/controls.png) no-repeat -43px -32px;
+}
+
+.bx-wrapper .bx-prev:hover {
+	background-position: 0 0;
+}
+
+.bx-wrapper .bx-next:hover {
+	background-position: -43px 0;
+}
+
+.bx-wrapper .bx-controls-direction a {
+	position: absolute;
+	top: 50%;
+	margin-top: -16px;
+	outline: 0;
+	width: 32px;
+	height: 32px;
+	text-indent: -9999px;
+	z-index: 9999;
+}
+
+.bx-wrapper .bx-controls-direction a.disabled {
+	display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.bx-wrapper .bx-controls-auto {
+	text-align: center;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start {
+	display: block;
+	text-indent: -9999px;
+	width: 10px;
+	height: 11px;
+	outline: 0;
+	background: url(http://localhost/finetouch/skin/frontend/finetouch/default/css/images/controls.png) -86px -11px no-repeat;
+	margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start:hover,
+.bx-wrapper .bx-controls-auto .bx-start.active {
+	background-position: -86px 0;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop {
+	display: block;
+	text-indent: -9999px;
+	width: 9px;
+	height: 11px;
+	outline: 0;
+	background: url(http://localhost/finetouch/skin/frontend/finetouch/default/css/images/controls.png) -86px -44px no-repeat;
+	margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop:hover,
+.bx-wrapper .bx-controls-auto .bx-stop.active {
+	background-position: -86px -33px;
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+	text-align: left;
+	width: 80%;
+}
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+	right: 0;
+	width: 35px;
+}
+
+/* IMAGE CAPTIONS */
+
+.bx-wrapper .bx-caption {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #666\9;
+	background: rgba(80, 80, 80, 0.75);
+	width: 100%;
+}
+
+.bx-wrapper .bx-caption span {
+	color: #fff;
+	font-family: Arial;
+	display: block;
+	font-size: .85em;
+	padding: 10px;
+}
+
+/* 
+ * 	Core Owl Carousel CSS File
+ *	v1.24
+ */
+
+/* clearfix */
+.owl-carousel .owl-wrapper:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+/* display none until init */
+.owl-carousel{
+	display: none;
+	position: relative;
+
+	-ms-touch-action: pan-y;
+	margin:0px 15px 0px 0;
+}
+.owl-carousel .owl-wrapper{
+	display: none;
+	position: relative;
+	-webkit-transform: translate3d(0px, 0px, 0px);
+}
+.owl-carousel .owl-wrapper-outer{
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+	margin-bottom:10px;
+}
+.owl-carousel .owl-wrapper-outer.autoHeight{
+	-webkit-transition: height 500ms ease-in-out;
+	-moz-transition: height 500ms ease-in-out;
+	-ms-transition: height 500ms ease-in-out;
+	-o-transition: height 500ms ease-in-out;
+	transition: height 500ms ease-in-out;
+}
+	
+.owl-carousel .owl-item{
+	float: left;
+}
+.owl-controls .owl-page,
+.owl-controls .owl-buttons div{
+	cursor: pointer;
+}
+.owl-controls {
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* mouse grab icon */
+.grabbing { 
+    cursor:url(http://localhost/finetouch/skin/frontend/finetouch/default/css/grabbing.png) 8 8, move;
+}
+
+/* fix */
+.owl-carousel  .owl-wrapper,
+.owl-carousel  .owl-item{
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility:    hidden;
+	-ms-backface-visibility:     hidden;
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+}
+
+/* CSS3 Transitions */
+
+.owl-origin {
+	-webkit-perspective: 1200px;
+	-webkit-perspective-origin-x : 50%;
+	-webkit-perspective-origin-y : 50%;
+	-moz-perspective : 1200px;
+	-moz-perspective-origin-x : 50%;
+	-moz-perspective-origin-y : 50%;
+	perspective : 1200px;
+}
+/* fade */
+.owl-fade-out {
+  z-index: 10;
+  -webkit-animation: fadeOut .7s both ease;
+  -moz-animation: fadeOut .7s both ease;
+  animation: fadeOut .7s both ease;
+}
+.owl-fade-in {
+  -webkit-animation: fadeIn .7s both ease;
+  -moz-animation: fadeIn .7s both ease;
+  animation: fadeIn .7s both ease;
+}
+/* backSlide */
+.owl-backSlide-out {
+  -webkit-animation: backSlideOut 1s both ease;
+  -moz-animation: backSlideOut 1s both ease;
+  animation: backSlideOut 1s both ease;
+}
+.owl-backSlide-in {
+  -webkit-animation: backSlideIn 1s both ease;
+  -moz-animation: backSlideIn 1s both ease;
+  animation: backSlideIn 1s both ease;
+}
+/* goDown */
+.owl-goDown-out {
+  -webkit-animation: scaleToFade .7s ease both;
+  -moz-animation: scaleToFade .7s ease both;
+  animation: scaleToFade .7s ease both;
+}
+.owl-goDown-in {
+  -webkit-animation: goDown .6s ease both;
+  -moz-animation: goDown .6s ease both;
+  animation: goDown .6s ease both;
+}
+/* scaleUp */
+.owl-fadeUp-in {
+  -webkit-animation: scaleUpFrom .5s ease both;
+  -moz-animation: scaleUpFrom .5s ease both;
+  animation: scaleUpFrom .5s ease both;
+}
+
+.owl-fadeUp-out {
+  -webkit-animation: scaleUpTo .5s ease both;
+  -moz-animation: scaleUpTo .5s ease both;
+  animation: scaleUpTo .5s ease both;
+}
+/* Keyframes */
+/*empty*/
+@-webkit-keyframes empty {
+  0% {opacity: 1}
+}
+@-moz-keyframes empty {
+  0% {opacity: 1}
+}
+@keyframes empty {
+  0% {opacity: 1}
+}
+@-webkit-keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@keyframes fadeIn {
+  0% { opacity:0; }
+  100% { opacity:1; }
+}
+@-webkit-keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+@-moz-keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+@keyframes fadeOut {
+  0% { opacity:1; }
+  100% { opacity:0; }
+}
+@-webkit-keyframes backSlideOut {
+  25% { opacity: .5; -webkit-transform: translateZ(-500px); }
+  75% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); }
+  100% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(-200%); }
+}
+@-moz-keyframes backSlideOut {
+  25% { opacity: .5; -moz-transform: translateZ(-500px); }
+  75% { opacity: .5; -moz-transform: translateZ(-500px) translateX(-200%); }
+  100% { opacity: .5; -moz-transform: translateZ(-500px) translateX(-200%); }
+}
+@keyframes backSlideOut {
+  25% { opacity: .5; transform: translateZ(-500px); }
+  75% { opacity: .5; transform: translateZ(-500px) translateX(-200%); }
+  100% { opacity: .5; transform: translateZ(-500px) translateX(-200%); }
+}
+@-webkit-keyframes backSlideIn {
+  0%, 25% { opacity: .5; -webkit-transform: translateZ(-500px) translateX(200%); }
+  75% { opacity: .5; -webkit-transform: translateZ(-500px); }
+  100% { opacity: 1; -webkit-transform: translateZ(0) translateX(0); }
+}
+@-moz-keyframes backSlideIn {
+  0%, 25% { opacity: .5; -moz-transform: translateZ(-500px) translateX(200%); }
+  75% { opacity: .5; -moz-transform: translateZ(-500px); }
+  100% { opacity: 1; -moz-transform: translateZ(0) translateX(0); }
+}
+@keyframes backSlideIn {
+  0%, 25% { opacity: .5; transform: translateZ(-500px) translateX(200%); }
+  75% { opacity: .5; transform: translateZ(-500px); }
+  100% { opacity: 1; transform: translateZ(0) translateX(0); }
+}
+@-webkit-keyframes scaleToFade {
+  to { opacity: 0; -webkit-transform: scale(.8); }
+}
+@-moz-keyframes scaleToFade {
+  to { opacity: 0; -moz-transform: scale(.8); }
+}
+@keyframes scaleToFade {
+  to { opacity: 0; transform: scale(.8); }
+}
+@-webkit-keyframes goDown {
+  from { -webkit-transform: translateY(-100%); }
+}
+@-moz-keyframes goDown {
+  from { -moz-transform: translateY(-100%); }
+}
+@keyframes goDown {
+  from { transform: translateY(-100%); }
+}
+
+@-webkit-keyframes scaleUpFrom {
+  from { opacity: 0; -webkit-transform: scale(1.5); }
+}
+@-moz-keyframes scaleUpFrom {
+  from { opacity: 0; -moz-transform: scale(1.5); }
+}
+@keyframes scaleUpFrom {
+  from { opacity: 0; transform: scale(1.5); }
+}
+
+@-webkit-keyframes scaleUpTo {
+  to { opacity: 0; -webkit-transform: scale(1.5); }
+}
+@-moz-keyframes scaleUpTo {
+  to { opacity: 0; -moz-transform: scale(1.5); }
+}
+@keyframes scaleUpTo {
+  to { opacity: 0; transform: scale(1.5); }
+}
+
+/*
+* 	Owl Carousel Owl Demo Theme 
+*	v1.24
+*/
+
+.staffs .owl-theme .owl-controls{
+     text-align: center;
+	 margin-top: 30px;
+	 position: static;
+ }
+.owl-theme .owl-controls{
+	 position: absolute;
+    right: 0;
+    text-align: center;
+    top: -62px;
+}
+
+/* Styling Next and Prev buttons */
+
+.owl-theme .owl-controls .owl-buttons div{
+ 	display: inline-block;
+ 	*display: inline;/*IE7 life-saver */
+	margin-left: 5px;
+ 	height: 27px;
+	text-indent: -99999px;
+    width: 27px;
+   }
+/* Clickable class fix problem with hover on touch devices */
+/* Use it for non-touch hover action */
+.owl-theme .owl-controls.clickable .owl-buttons div:hover{
+	filter: Alpha(Opacity=100);/*IE7 fix*/
+	opacity: 1;
+	text-decoration: none;
+}
+
+/* Styling Pagination*/
+
+.owl-theme .owl-controls .owl-page{
+	display: inline-block;
+	zoom: 1;
+	*display: inline;/*IE7 life-saver */
+}
+.owl-theme .owl-controls .owl-page span{
+	display: block;
+	width: 12px;
+	height: 12px;
+	margin: 5px 7px;
+	opacity: 0.5;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background: #afafaf;
+}
+
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+	background: #28a654;
+}
+
+/* If PaginationNumbers is true */
+
+.owl-theme .owl-controls .owl-page span.owl-numbers{
+	height: auto;
+	width: auto;
+	color: #FFF;
+	padding: 2px 10px;
+	font-size: 12px;
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+}
+
+/* preloading images */
+.owl-item.loading{
+	min-height: 150px;
+	background: url(http://localhost/finetouch/skin/frontend/finetouch/default/css/AjaxLoader.gif) no-repeat center center
+}
+.usual .owl-carousel .owl-prev
+{
+  background:url(http://localhost/finetouch/skin/frontend/finetouch/default/images/feature-nav-left.png) no-repeat left center !important;
+ }
+ 
+.usual .owl-carousel .owl-next
+{
+ background:url(http://localhost/finetouch/skin/frontend/finetouch/default/images/feature-nav-right.png) no-repeat left center !important;
+ }
+ 
+@charset "utf-8";
+/* CSS Document */
+
+@media only screen and (max-width:770px){
+	
+	.ftr-col1{
+		width:100%;
+	}
+}
+/** RESET AND LAYOUT
+===================================*/
+
+.bx-wrapper {
+    position: relative;
+    margin: 0 auto 60px;
+    padding: 0;
+    *zoom: 1;
+}
+
+
+
+/** THEME
+===================================*/
+
+.bx-wrapper .bx-viewport {
+    -moz-box-shadow: 0 0 5px #ccc;
+    -webkit-box-shadow: 0 0 5px #ccc;
+    box-shadow: 0 0 5px #ccc;
+    border: solid #fff 5px;
+    left: -5px;
+    background: #fff;
+
+}
+
+.bx-wrapper .bx-pager,
+.bx-wrapper .bx-controls-auto {
+    position: absolute;
+    bottom: -30px;
+    width: 100%;
+}
+
+/* LOADER */
+
+.bx-wrapper .bx-loading {
+    min-height: 50px;
+    background: url(http://localhost/finetouch/skin/frontend/base/default/atlas/css/images/bx_loader.gif) center center no-repeat #fff;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+}
+
+/* PAGER */
+
+.bx-wrapper .bx-pager {
+    text-align: center;
+    font-size: .85em;
+    font-family: Arial;
+    font-weight: bold;
+    color: #666;
+    padding-top: 20px;
+}
+
+.bx-wrapper .bx-pager .bx-pager-item,
+.bx-wrapper .bx-controls-auto .bx-controls-auto-item {
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a {
+    background: #666;
+    text-indent: -9999px;
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0 5px;
+    outline: 0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active {
+    background: #000;
+}
+
+/* DIRECTION CONTROLS (NEXT / PREV) */
+
+.bx-wrapper .bx-prev {
+    left: 10px;
+    /*background: url(http://localhost/finetouch/skin/frontend/base/default/atlas/img/prew.png) no-repeat; */
+}
+
+.bx-wrapper .bx-next {
+    right: 18px;
+    /*background: url(http://localhost/finetouch/skin/frontend/base/default/atlas/img/next.png) no-repeat; */
+}
+
+.bx-wrapper .bx-prev:hover {
+    /*background-position: 0 0;*/
+    /*background: url(http://localhost/finetouch/skin/frontend/base/default/atlas/img/prew-light.png) no-repeat; */
+    /*url(http://localhost/finetouch/skin/frontend/base/default/atlas/images/btn_checkout.gif)*/
+}
+
+.bx-wrapper .bx-next:hover {
+    /*background-position: -43px 0;*/
+    /*background: url(http://localhost/finetouch/skin/frontend/base/default/atlas/img/next-light.png) no-repeat;*/
+}
+
+.bx-wrapper .bx-controls-direction a {
+    position: absolute;
+    top: 50%;
+    margin-top: -16px;
+    outline: 0;
+    width: 32px;
+    height: 32px;
+    text-indent: -9999px;
+    z-index: 999;
+}
+
+.bx-wrapper .bx-controls-direction a.disabled {
+    display: none;
+}
+
+/* AUTO CONTROLS (START / STOP) */
+
+.bx-wrapper .bx-controls-auto {
+    text-align: center;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start {
+    display: block;
+    text-indent: -9999px;
+    width: 10px;
+    height: 11px;
+    outline: 0;
+    background: url(http://localhost/finetouch/skin/frontend/base/default/atlas/css/images/controls.png) -86px -11px no-repeat;
+    margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-start:hover,
+.bx-wrapper .bx-controls-auto .bx-start.active {
+    background-position: -86px 0;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop {
+    display: block;
+    text-indent: -9999px;
+    width: 9px;
+    height: 11px;
+    outline: 0;
+    background: url(http://localhost/finetouch/skin/frontend/base/default/atlas/css/images/controls.png) -86px -44px no-repeat;
+    margin: 0 3px;
+}
+
+.bx-wrapper .bx-controls-auto .bx-stop:hover,
+.bx-wrapper .bx-controls-auto .bx-stop.active {
+    background-position: -86px -33px;
+}
+
+/* PAGER WITH AUTO-CONTROLS HYBRID LAYOUT */
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-pager {
+    text-align: left;
+    width: 80%;
+}
+
+.bx-wrapper .bx-controls.bx-has-controls-auto.bx-has-pager .bx-controls-auto {
+    right: 0;
+    width: 35px;
+}
+
+/* IMAGE CAPTIONS */
+
+.bx-wrapper .bx-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #666\9;
+    background: rgba(80, 80, 80, 0.75);
+    width: 100%;
+}
+
+.bx-wrapper .bx-caption span {
+    color: #fff;
+    font-family: Arial;
+    display: block;
+    font-size: .85em;
+    padding: 10px;
+}
+.bx-wrapper ul li { margin-left:0px !important; }
+.bx-wrapper ul { padding-left:0px !important; }
+.bx-wrapper{clear:both;}
+/* Top */
+.credit-limit-top { background-color: #676157; border-bottom: 1px solid #fff; color: #fff; } 
+.credit-limit-top .main-container { padding-top: 5px; padding-bottom: 5px; } 
+.credit-limit-top .container > p { text-align: center; }
+.credit-limit-top .title { color: #fff; }
+.credit-limit-top ul { overflow: hidden; width: -moz-fit-content; width: -webkit-fit-content; width: fit-content; margin: auto; }
+.credit-limit-top ul li { float: left; margin-right: 15px; } 
+.credit-limit-top ul li:last-child { margin-right: 0; }
+.credit-limit-top ul li > img {margin: auto; max-width: 150px;} 
+/* End of Top*/
+/* Checkout */
+#payment_form_payonaccountplus li { background-color: #f4f4f4; border: 1px solid #ececec; overflow: hidden; padding: 10px; }
+#payment_form_payonaccountplus li > div { float: left; margin-right: 15px; }
+#payment_form_payonaccountplus li > div:last-child { margin-right: 0; }
+.payonaccountplus_checkbox { padding: 10px; width: 40px; }
+.payonaccountplus_logo { width: 150px; }
+.payonaccountplus_logo > img { max-width: 100%; }
+
+/* End of Checkout */
+/*
+/**
+* Phxsolution Formbuilder
+*
+* NOTICE OF LICENSE
+*
+* This source file is subject to the Open Software License (OSL 3.0)
+* that is bundled with this package in the file LICENSE.txt.
+* It is also available through the world-wide-web at this URL:
+* http://opensource.org/licenses/osl-3.0.php
+* If you did not receive a copy of the license and are unable to
+* obtain it through the world-wide-web, please send an email
+* to license@magentocommerce.com so you can be sent a copy immediately.
+*
+* Original code copyright (c) 2008 Irubin Consulting Inc. DBA Varien
+*
+* @category   module css
+* @package    Phxsolution_Formbuilder
+* @author     Murad Ali
+* @contact    contact@phxsolution.com
+* @site       www.phxsolution.com
+* @copyright  Copyright (c) 2014 Phxsolution Formbuilder
+* @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+*/
+.form-list .input-box {width:450px}
+.product-options {border: 1px solid #333;}
+.formbuilder ul {list-style: none !important; list-style-type: none !important;}
+/**
+ * css for my team
+ *
+ *
+ * @category   SKJ
+ * @package    SKJ_Meetmyteam
+ * @author     Sanjeev Kumar Jha <jha.sanjeev.in@gmail.com>
+ */
+
+/*======================Meet my team========================*/
+.leader_not {
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+	margin-left: -20px;
+}
+.leader_not li {
+	float:left;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.photo_section {
+	
+	width: 100%;
+	margin-bottom: 10px;
+	display:block;
+}
+.photo_section img {
+	max-height: 170px;
+	max-width:150px;
+}
+.full-bio .links {
+	float:none;
+}
+.meetmyteam-detail {
+	float: left;
+	width: 100%;
+	margin-top: 30px;
+}
+
+
+
+.meetmyteam-detail img {
+	float: left;
+	margin: 0 20px 0 0;	
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.meetmyteam-detail p {
+	font-size: 14px;
+	line-height: 24px;
+}
+.detail-back {
+	color: #fff !important;
+	text-transform: uppercase;
+	display: block;
+	background: #10578d;
+	text-decoration:none;
+	font-family: 'open_sanssemibold';
+	font-size: 16px;
+	padding: 8px 9px;
+	font-style: normal;
+	float:right;
+}
+.detail-back:hover {
+	background: #36987c;
+	color: #fff !important;
+}
+.detail-back-rb {
+	color: #fff !important;
+	text-transform: uppercase;
+	display: block;
+	background: #36987c;
+	
+	font-family: 'open_sanssemibold';
+	font-size: 16px;
+	padding: 8px 9px;
+	font-style: normal;
+	float:right;
+	position:relative;
+	top:-50px;
+}
+.detail-back-rb:hover {
+	background: #10578d;
+	color: #fff !important;
+}
+
+
+
+.myteam-head {
+	padding-top: 30px;
+}
+
+.full-bio{padding: 7px 0px;}
+
+.full-bio a{ color:#36987c;}
+.full-bio a:hover{ color:#3d6277;}
+
+
+
+.leader_not .title{ font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; color:#3d6277;}
+
+.leader_not .sub-heading{ font-size:13px;}
+
+.meetmyteam-detail img{ width:250px; height:283px;}
+
+
+
+.team-wrapper{
+    display: inline-block;
+}
+.team-wrapper li {
+    display: inline-block;
+    text-align: center;
+    float: left;
+    max-height:366px;
+    min-height: 310px!important;
+    margin: 10px 8px;
+    width: 187px;
+    padding: 10px;
+}
+.team-wrapper li.ourteam-list-item  .team-mem-img {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #999999;
+    border-radius: 50%;
+}
+.team-wrapper li.ourteam-list-item  a img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}
+.team-wrapper li.ourteam-list-item:hover  .team-mem-img {
+    border-color: #de5400;
+}
+.team-wrapper li.ourteam-list-item:hover  .team-mem-img img {
+    transform: scale(1.1);
+}
+.team-wrapper li:hover a{
+    text-decoration: none;
+}
+.team-wrapper li .member_avatar {
+    max-width: 100%;
+    text-align: center;
+    display: inherit;
+}
+h2.full-name {
+    font-size: 16px;
+    margin: 10px 0px 5px; 
+    max-height: 20px; 
+    overflow: hidden;
+    color: #2f2f2f;
+}
+h2.full-name a{
+    color: #000; 
+    text-decoration: none;
+}
+.team-wrapper li #greg_description {
+    max-height: 45px; 
+    overflow: hidden;
+    color: #0a263c;
+}
+.ourteam-detail .ourteam-short_desc{ 
+    float: left;
+    margin-left: 0;
+    margin-top: 5px; 
+    width: 100%; 
+}
+.ourteam-description{
+    float: left; 
+    margin-top: 5px;
+}
+.read-more {
+    background: #999999;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    margin: 15px 0;
+    padding: 5px 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+.read-more:hover{
+    color: #fff;
+    background: #de5400;
+}
+.ourteam-view {
+    padding: 20px;
+    display: inline-block;
+    width: 95%;
+    margin-bottom: 5px;
+}
+.team-img{
+    float: left; 
+    width: auto; 
+    margin-right: 20px;
+    text-align: -webkit-center;
+    border: 1px solid rgba(204, 204, 204, 0.41);
+}
+.team-img img{
+    max-width: 100%;
+}
+.team-block-left{
+    float: left; 
+    width: 35%;
+}
+.team-block-right{
+    float: left; 
+    width: 65%;
+}
+.back-btn{
+    float: left;
+    width: 100%;
+}
+.social-icon {
+    padding-top: 5px;
+}

@@ -1,0 +1,37 @@
+<?php $product = $this->getProduct(); ?>
+<?php $tier_price_array = $product->getFormatedTierPrice(); ?>	  
+<?php if(count($tier_price_array) > 0 && $product->getTypeId() !== 'bundle' ){ ?>
+	<?php  $productPrice = $product->getPrice();
+			if ($product->getPrice() != $product->getFinalPrice()) {
+			 	$productPrice = $product->getFinalPrice();
+			}
+	?>
+	
+	<?php $formattedTirePrice = Mage::helper('core')->currency($this->getMinTirePrice(), true, false) ?>
+	
+	<div class="tire-price-container">
+	
+		<span class="tireprice-title"><?php echo $this->__('As low as %s each',$formattedTirePrice) ?></span>
+		
+			
+		
+		
+		
+		
+		
+		<ul class="tier-prices product-pricing orderlist-tireprices">
+		<?php $count = 0;?>
+		<?php foreach ($tier_price_array as $tire_price_data){ ?>	
+			<?php if(($product->getPrice() == $product->getFinalPrice() && $product->getPrice() > $tire_price_data['price'])
+	            || ($product->getPrice() != $product->getFinalPrice() &&  $product->getFinalPrice() > $tire_price_data['price'])){  ?>		
+				<li class="tier-price tier-<?php echo $count ?>">		 
+					 <?php echo $this->__('Buy %1$s for %2$s', (int)$tire_price_data['price_qty'], $tire_price_data['formated_price']) ?>			 		 
+					 <?php $savePercent = ceil(100 - ((100 / $productPrice) * $tire_price_data['price'])) ?>		 
+					 <?php echo $this->__('and') ?>&nbsp;<strong class="benefit"><?php echo $this->__('save')?>&nbsp;<span class="percent tier-<?php echo $count;?>"><?php echo $savePercent ?></span>%</strong>
+				</li>		
+			<?php } ?>	
+		<?php } ?>
+		</ul>	 
+	
+	</div> 
+<?php } ?>

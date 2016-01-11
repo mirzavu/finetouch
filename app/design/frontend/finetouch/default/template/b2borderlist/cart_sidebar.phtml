@@ -1,0 +1,170 @@
+<?php $mode = Mage::getSingleton('catalog/session')->getDisplayMode();?>
+<?php $count = 0;?>   
+<?php if ($this->getIsNeedToDisplaySideBar()):?>
+<div class="block block-cart-list">
+    <?php $_cartQty = $this->getSummaryCount() ?>
+    <div class="block-title">
+        <strong><span><?php echo $this->__('My Cart') ?></span></strong>
+    </div>
+    <div class="block-content">
+    <?php if ($_cartQty>0): ?>
+      <form method="post" action="<?php echo $this->getUrl('orderlist/cart/addsidebar/origin/sidebar') ?>" id="cart-sidebar">
+        <div class="summary">
+		<div class="totals">        
+            <?php if ($_cartQty==1): ?>
+                <p class="amount"><?php echo $this->__('<a href="%s">1 item</a> ', $this->getUrl('checkout/cart')) ?></p>
+            <?php else: ?>
+                <p class="amount"><?php echo $this->__('<a href="%s">%s items</a>', $this->getUrl('checkout/cart'), $_cartQty) ?></p>
+            <?php endif ?>
+            <p class="subtotal">
+                   <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                    <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                        <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                    <?php endif; ?>
+            </p>
+            </div>
+            <?php 
+            
+    			$items = $this->getItems();?>
+    			<?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+    			<!-- <p class="p-cart">&nbsp</p> -->
+    			<div class="cart-products">
+    			 	<table class="cart-sidebar-list">
+    				<?php foreach ($items as $item){?>
+    					<?php $count ++; $class_row = ($count % 2 == 0)? "even" :"odd" ;?>
+    					<tr class="product-line <?php echo $class_row?>">
+    						<td class="product-input">
+				    		<div class="product-input">
+				    			<?php 
+				    			
+				    			$product = $item->getProduct();
+				    			
+				    			$options = $item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct());
+				    			if ($product->getTypeId()  == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE) {
+									?>
+				   					<input class="input-text qty" maxlength="12" value='<?php  echo $item->getQty()?>' id="qty-sidebar" name='qty-sidebar[conf][qty][<?php echo $item->getId() ?>][<?php echo $item->getProduct()->getId() ?>]'></input><a class="btn-remove btn-remove1" href="<?php echo $this->getUrl('checkout/cart/delete')?>id/<?php echo $item->getId()?>"></a>
+				    				<input class="input-text qty" maxlength="12" type="hidden" value='<?php  echo serialize($options['info_buyRequest'])?>' id="qty-sidebar" name='qty-sidebar[conf][<?php echo $item->getId() ?>][<?php echo $item->getProduct()->getId() ?>][<?php echo $options['info_buyRequest']['product'] ?>]'></input>
+				    			
+				    				<?php  
+				   				}
+				   				
+				   				if ($product->getTypeId()  == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE) {
+                                     
+								?>
+									<input class="input-text qty" maxlength="12" value='<?php  echo $item->getQty()?>' id="qty-sidebar" name='qty-sidebar[bundle][qty][<?php echo $item->getId() ?>][<?php echo $item->getProduct()->getId() ?>]'></input><a class="btn-remove btn-remove1" href="<?php echo $this->getUrl('checkout/cart/delete')?>id/<?php echo $item->getId()?>"></a>
+									<input class="input-text qty" maxlength="12" type="hidden" value='<?php  echo serialize($options['info_buyRequest'])?>' id="qty-sidebar" name='qty-sidebar[bundle][<?php echo $item->getId() ?>][<?php echo $item->getProduct()->getId() ?>][<?php echo $options['info_buyRequest']['product'] ?>]'></input>
+ 
+								<?php }
+				   				if ($product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_BUNDLE && $product->getTypeId()  != Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE){
+				    				?>
+				    					<input class="input-text qty" maxlength="12" value="<?php echo $item->getQty()?>" id="qty-sidebar" name="qty-sidebar[simple][<?php echo $item->getId() ?>][<?php echo $item->getProduct()->getId() ?>]"></input><a class="btn-remove btn-remove1" href="<?php echo $this->getUrl('checkout/cart/delete')?>id/<?php echo $item->getId()?>"></a>
+				    			
+				    				<?php 
+				    			}
+				    			?>
+				    		
+				    			</div>
+				    		</td>
+	    					<td class="product-name">
+	    						<div class="cart-product-name">
+	    							<?php echo $item->getName();?>
+	    						</div>
+	    					</td>
+	    				    <td class="product-amount">
+	    					
+				        		<div class="product_amount">
+				        			<?php if (Mage::helper('weee')->typeOfDisplay($item, array(1, 4), 'sales') && $item->getWeeeTaxAppliedAmount()): ?>
+				            			<span class="cart-tax-total" onclick="taxToggle('esubtotal-item-tax-details<?php echo $item->getId(); ?>', this, 'cart-tax-total-expanded');">
+				        			<?php else: ?>
+				            			<span class="cart-price">
+				        			<?php endif; ?>
+				
+				           			 <?php if ($canApplyMsrp): ?>
+				                		<span class="cart-msrp-subtotal">--</span>
+				            		<?php else: ?>
+				                		<?php if (Mage::helper('weee')->typeOfDisplay($item, array(0, 1, 4), 'sales') && $item->getWeeeTaxAppliedAmount()): ?>
+				                    		<?php echo $this->helper('checkout')->formatPrice($item->getRowTotal()+$item->getWeeeTaxAppliedRowAmount()+$item->getWeeeTaxRowDisposition()); ?>
+				                		<?php else: ?>
+				                    		<?php echo $this->helper('checkout')->formatPrice($item->getRowTotal()) ?>
+				                		<?php endif; ?>
+				            		<?php endif; ?>
+				        				</span>
+				        			<?php if (Mage::helper('weee')->getApplied($item)): ?>
+				
+				            			<div class="cart-tax-info" id="esubtotal-item-tax-details<?php echo $item->getId(); ?>" style="display:none;">
+				                		<?php if (Mage::helper('weee')->typeOfDisplay($item, 1, 'sales') && $item->getWeeeTaxAppliedAmount()): ?>
+				                    		<?php foreach (Mage::helper('weee')->getApplied($item) as $tax): ?>
+				                        		<span class="weee"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount'],true,true); ?></span>
+				                    		<?php endforeach; ?>
+				                		<?php elseif (Mage::helper('weee')->typeOfDisplay($item, 2, 'sales') && $item->getWeeeTaxAppliedAmount()): ?>
+				                    	<?php foreach (Mage::helper('weee')->getApplied($item) as $tax): ?>
+				                        	<span class="weee"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></span>
+				                    	<?php endforeach; ?>
+				                		<?php elseif (Mage::helper('weee')->typeOfDisplay($item, 4, 'sales') && $item->getWeeeTaxAppliedAmount()): ?>
+				                    	<?php foreach (Mage::helper('weee')->getApplied($item) as $tax): ?>
+				                        	<span class="weee"><?php echo $tax['title']; ?>: <?php echo Mage::helper('checkout')->formatPrice($tax['row_amount_incl_tax'],true,true); ?></span>
+				                    	<?php endforeach; ?>
+				                	<?php endif; ?>
+				            	</div>
+				            	<?php if (Mage::helper('weee')->typeOfDisplay($item, 2, 'sales') && $item->getWeeeTaxAppliedAmount()): ?>
+				                	<div class="cart-tax-total" onclick="taxToggle('esubtotal-item-tax-details<?php echo $item->getId(); ?>', this, 'cart-tax-total-expanded');">
+				                    	<span class="weee"><?php echo Mage::helper('weee')->__('Total'); ?>: <?php echo $this->helper('checkout')->formatPrice($item->getRowTotal()+$item->getWeeeTaxAppliedRowAmount()+$item->getWeeeTaxRowDisposition()); ?></span>
+				                	</div>
+				            	<?php endif; ?>
+				        	<?php endif; ?>
+				    		</div>
+	    				</td>
+	    			</tr>
+    		<?php }?>
+    		</table>
+    	</div>
+    	<?php endif ?>
+
+    	<?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+    	  <div class="update">
+    		<button type="submit" title="<?php echo $this->__('Add All to Cart') ?>" onclick="" class="button"><span><span><?php echo $this->__('Bestellen') ?></span></span></button>
+    	</div>
+    	</form>
+    <script type="text/javascript">
+    //<![CDATA[
+    function addAllWItemsToCart1() {
+        var url = '<?php echo $this->getUrl('orderlist/cart/addallitems/origin/sidebar') ?>';
+
+         var separator = (url.indexOf('?') >= 0) ? '&' : '?';
+        $$('#qty-sidebar').each(
+            function (input, index) {
+                url += separator + input.name + '=' + encodeURIComponent(input.value);
+                separator = '&';
+            }
+        );
+
+        setLocation(url);
+    }
+    //]]>
+    </script>
+    <?php endif?>
+
+            
+        </div>
+    <?php endif ?>
+    
+    <?php $_items = $this->getRecentItems() ?>
+    <?php if(count($_items)): ?>
+        <!-- <p class="block-subtitle"><?php echo $this->__('Recently added item(s)') ?></p> -->
+        <!-- <ol id="cart-sidebar" class="mini-products-list">
+        <?php //foreach($_items as $_item): ?>
+            <?php //echo $this->getItemHtml($_item) ?>
+        <?php //endforeach; ?>
+        </ol> -->
+        <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+    <?php else: ?>
+        <p class="empty"><?php echo $this->__('You have no items in your shopping cart.') ?></p>
+    <?php endif ?>
+    
+    </div>
+    <?php echo $this->getLayout()->createBlock("cms/block")->setBlockId('payment-methods')->toHtml()?>
+  
+</div>
+
+<?php endif;?>
+

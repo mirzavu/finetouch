@@ -1,0 +1,268 @@
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+	
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<?php if($this->getMode()!='grid'){?><div class="page-title"><h1><?php echo $this->__("Order Form") ?></h1></div><?php }?>
+<div class="category-products">
+    <?php echo $this->getToolbarHtml() ?>
+    <?php // List mode ?>
+    
+    <?php $_iterator = 0; ?>
+   <form id="b2borderlist_submitform" method="post" action="<?php echo $this->getUrl('orderlist/cart/additems') ?>">
+     <div class="in-cart-top"><button type="submit" title="<?php echo $this->__('Add All to Cart') ?>" onclick="" class="button btn-add"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></div>
+   
+    <input type="hidden" name="origin" value="list"/>
+    <input type="hidden" name="base_url" id="base_url" value="<?php echo Mage::getBaseUrl() ?>" />
+    
+    <div class="orderlist-table-container">
+    
+	    <table class="table-category" id="table-products">
+	     	<thead>
+	    		<tr class="table-heading"><td class="product_image"></td><td class="sku"><span class="name"><?php echo $this->__("SKU number") ?></span></td><td class="name"><span class="name"><?php echo $this->__("Product")?></span></td><td class="sort-price"><?php echo $this->__("Price")?></td><td class="amount"><?php echo $this->__("Quantity")?></td></tr>
+	    	</thead>
+	    	<tbody>
+	    		<?php $counter; ?>
+	    		<?php foreach ($_productCollection as $_product):
+	         	$counter++;
+	            //$_product = Mage::getModel('catalog/product')->load($_product->getId());
+	     		if($counter % 2 == 0){
+	     			$class =  "even";
+	     		}
+	     		else {
+	     			$class = "";
+	    		 }
+	    
+	    		?> 
+	       		<?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
+	       		
+	        	<tr class="<?php echo $class?> row-<?php echo $_product->getId() ?>">
+	        		<td class="product-image" >
+		        		<div  id="image">
+		         			<a href="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(256)?>" class="zoom"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(52,57)?>" alt="<?php echo $_product->getName()?>" /></a>
+		         		</div>      	    						   	
+	         		</td>       
+	  		 		<td><?php echo $_product->getSku()?></td>
+	           		<td class="name">
+	           			<a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a>
+	           		</td>
+	  				<td class="sort-price">
+	  					<?php echo $this->getPriceHtml($_product, true) ?>	  				
+	  				</td> 
+	  				<td class="amount">
+		  				<?php if($_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE && $_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_BUNDLE && $_product->getTypeId() != Mage_Catalog_Model_Product_Type::TYPE_GROUPED){?>	
+		  					
+		  					<?php if(!$_product->isSaleable()): ?>
+		                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+		                    <?php else: ?>
+		            		<input type="text" name="qty[<?php echo $_product->getId()?>]" alt="alts[<?php echo $_product->getId() ?>]" id="qty" data-product-id="<?php echo $_product->getId() ?>" maxlength="12" value="0" title="<?php echo $this->__('Qty') ?>" class="input-text qty simple-qty"  />
+		            		
+		            		<div class="orderlist-message message-<?php echo $_product->getId()?>">
+		            			<span>some message here</span>
+		            		</div>
+		            		
+		            		
+		            		<?php endif; ?> 
+		           		<?php }else{?>
+		           		      <a href="#" id="" onclick="getProductOptions(this); return false;"><?php echo $this->__("View Product options")?></a>
+		           		<?php }?>	           		 
+	           		</td>
+	           		<?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_SIMPLE){?>
+		           		<td class="orderlist-preloader">
+							<div class="black"></div>
+							<div class="preloader-img"></div>
+		           		</td>
+	           		<?php } ?>           		
+	          </tr> 
+	          <?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE){?>
+	          		<tr class="complex-product-children-tr">
+	          		   <td colspan="5">
+	          		   	   <div class="complex-product-children">
+		          			  <div class="options-content-wrapper">
+			          			 <div class="conf_qty">
+								    <label for="qty<?php echo $_product->getId()?>"><?php echo $this->__("Qty")?></label>
+								 	<input type="text" id="qty<?php echo $_product->getId()?>" name="conf[qty][<?php echo $_product->getId()?>]" alt="alts[<?php echo $_product->getId() ?>]" id="qty" maxlength="12" value="0" title="<?php echo $this->__('Qty') ?>" class="input-text qty"  />
+								 </div>
+			          			  <div class="options"> 
+			          			    <?php Mage::unregister('product') ?>
+									<?php Mage::register('product', $_product); ?>
+									<?php echo $this->getLayout()->createBlock('b2borderlist/product_options_configurable', '', array('template'=> 'b2borderlist/product/options/configurable.phtml'))->toHtml(); ?>
+								 </div>
+								
+							</div>
+		          			   <div class="options-block-close"><a href="#" onclick="closeProductOptions(this); return false;"><?php echo $this->__("Close X")?></a></div>
+		          			</div>
+	          			</td>
+	          		</tr>
+	          <?php }?>
+	          
+	           <?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE){?>
+	          		<tr class="complex-product-children-tr">
+	          		   <td colspan="5">
+	          		   	   <div class="complex-product-children">
+		          			  <div class="options-content-wrapper">
+		          			  	<div class="conf_qty">
+								    <label for="qty<?php echo $_product->getId()?>"><?php echo $this->__("Qty")?></label>
+								 	<input type="text" id="qty<?php echo $_product->getId()?>" name="bundle[<?php echo $_product->getId()?>][qty]" alt="alts[<?php echo $_product->getId() ?>]" id="qty" maxlength="12" value="0" title="<?php echo $this->__('Qty') ?>" class="input-text qty"  />
+								 </div>
+			          			  <div class="options"> 
+			          			    <?php Mage::unregister('current_product') ?>
+			          			      <?php Mage::unregister('product') ?>
+			          			    <?php //$_product = Mage::getModel("catalog/product")->load($_product->getId())?>
+									<?php Mage::register('current_product', $_product); ?>
+									<?php Mage::register('product', $_product); ?>
+									<?php 
+									   $block =  $this->getLayout()->createBlock('bundle/catalog_product_view_type_bundle', '', array('template'=> 'b2borderlist/product/options/bundle.phtml'));
+									   $block->addRenderer("select", "b2borderlist/catalog_product_bundle_option_select");
+									   $block->addRenderer("multi", "b2borderlist/catalog_product_bundle_option_multi");
+									   $block->addRenderer("radio", "b2borderlist/catalog_product_bundle_option_radio");
+									   $block->addRenderer("checkbox", "b2borderlist/catalog_product_bundle_option_checkbox");
+									   echo $block->toHtml();
+									?>
+								 </div>
+								</div>
+		          			   <div class="options-block-close"><a href="#" onclick="closeProductOptions(this); return false;"><?php echo $this->__("Close X")?></a></div>
+		          			</div>
+	          			</td>
+	          		</tr>
+	          <?php }?>
+	          <?php if($_product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_GROUPED){?>
+	          		<tr class="complex-product-children-tr">
+	          		   <td colspan="5">
+	          		   	   <div class="complex-product-children">
+		          			  <div class="options-content-wrapper">
+			          			 <!--
+			          			 <div class="conf_qty">
+								    <label for="qty<?php echo $_product->getId()?>"><?php echo $this->__("Qty")?></label>
+								 	<input type="text" id="qty<?php echo $_product->getId()?>" name="conf[qty][<?php echo $_product->getId()?>]" alt="alts[<?php echo $_product->getId() ?>]" id="qty" maxlength="12" value="0" title="<?php echo $this->__('Qty') ?>" class="input-text qty"  />
+								 </div>
+								 -->
+			          			  <div class="options"> 
+			          			    <?php Mage::unregister('product') ?>
+									<?php Mage::register('product', $_product); ?>
+									<?php echo $this->getLayout()->createBlock('catalog/product_view_type_grouped', '', array('template'=> 'b2borderlist/product/options/grouped.phtml'))->toHtml(); ?>
+								 </div>
+								
+							</div>
+		          			   <div class="options-block-close"><a href="#" onclick="closeProductOptions(this); return false;"><?php echo $this->__("Close X")?></a></div>
+		          			</div>
+	          			</td>
+	          		</tr>
+	          <?php }?>
+	    <?php endforeach ?>
+	     	</tbody>
+	     	<tfoot>
+	    		<tr class="table-heading"><!--<td class="product_image"></td><td class="sku"><span class="name"><?php // echo $this->__("SKU number") ?></span></td><td class="name"><span class="name"><?php  //echo $this->__("Product")?></span></td><td class="sort-price"><?php // echo $this->__("Price")?></td><td class="amount"><?php // echo $this->__("Quantity")?></td>  --></tr>
+	     	</tfoot>
+	    </table>
+	    
+    
+    </div>
+    
+    <div class="in-cart"><button type="submit" title="<?php echo $this->__('Add All to Cart') ?>" onclick="submitForm()" class="button btn-add"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></div>
+    </form>
+    
+ <script type="text/javascript">
+     var listform = new VarienForm('b2borderlist_submitform');
+     function submitForm(){
+        jQuery(".b2borderlist-bundle-options .qty-holder input").attr("disabled", false); 
+        if(listform.validator /* && listform.validator.validate() */){
+        	listform.form.submit();
+        }
+        return false;
+     }
+    </script>
+    
+ <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
+ <script type="text/javascript">
+	jQuery(document).ready(function() {
+			 if(<?php echo (($this->getMode()!='grid') ? "true" : "false")?>) {
+		        jQuery('body').addClass('catalog-category-view-bestellijst');			       
+		     }
+
+			jQuery('.simple-qty').focusout(function() {
+				var base_url = jQuery("#base_url").val();
+				var prod_id = jQuery(this).data('product-id');
+				var qty = jQuery(this).val();
+				var row = jQuery('.row-' + prod_id);
+				if(qty != parseInt(qty, 10) || qty <= 0){					
+					return;
+				}
+				row.addClass( 'preloader' );
+   				jQuery.ajax({
+   			        url: base_url + "orderlist/index/checkQty",
+   			        type: "POST",
+   			        data: { prod_id: prod_id, qty: qty },
+   			        success: function(data) {   			        	
+						if(data.available == 0){
+							jQuery('.message-' + prod_id + ' > span').html( data.message );
+							jQuery('.message-' + prod_id).show();
+							jQuery('.message-' + prod_id).show(0).delay(1000).hide(0);												
+						}   			        		
+   			        	row.removeClass( 'preloader' )
+   			        },
+   			        error:function(data){
+   			        	row.removeClass( 'preloader' );        	
+   			        }
+   			    });		   				
+  			});		     
+	});
+	function getProductOptions(link){
+		jQuery(link).parents("tr").next("tr").find('.complex-product-children').find("select").each(function(){
+			if(jQuery(this).hasClass('required-entry-b2borderlist')){
+				jQuery(this).removeClass('required-entry-b2borderlist').addClass('required-entry');
+			}
+		})
+		
+		jQuery(link).parents("tr").next("tr").find('.complex-product-children').find("input[type='radio']").each(function(){
+			if(jQuery(this).hasClass('validate-one-required-by-name-b2borderlist')){
+				jQuery(this).removeClass('validate-one-required-by-name-b2borderlist').addClass('validate-one-required-by-name');
+			}
+		})
+		
+		jQuery(link).parents("tr").next("tr").find('.complex-product-children').find("input[type='checkbox']").each(function(){
+			if(jQuery(this).hasClass('validate-one-required-by-name-b2borderlist')){
+				jQuery(this).removeClass('validate-one-required-by-name-b2borderlist').addClass('validate-one-required-by-name');
+			}
+		})
+		jQuery(link).parents("tr").next("tr").find('.complex-product-children').show();
+	}
+	
+	function closeProductOptions(link){
+		jQuery(link).parents("tr").next("tr").find('.complex-product-children').find("select").each(function(){
+			if(jQuery(this).hasClass('required-entry')){
+				jQuery(this).removeClass('required-entry').addClass('required-entry-b2borderlist');
+			}
+		})
+		
+		jQuery(link).parents("tr").next("tr").find('.complex-product-children').find("input[type='radio']").each(function(){
+			if(jQuery(this).hasClass('validate-one-required-by-name')){
+				jQuery(this).removeClass('validate-one-required-by-name').addClass('validate-one-required-by-name-b2borderlist');
+			}
+		})
+		
+		jQuery(link).parents("tr").next("tr").find('.complex-product-children').find("input[type='checkbox']").each(function(){
+			if(jQuery(this).hasClass('validate-one-required-by-name')){
+				jQuery(this).removeClass('validate-one-required-by-name').addClass('validate-one-required-by-name-b2borderlist');
+			}
+		})
+		
+		jQuery(link).parents(".complex-product-children").hide();
+	}	
+</script>
+<div class="toolbar-bottom">
+        <?php echo $this->getToolbarHtml() ?>
+    </div>
+</div>
+<?php endif; ?>
+           

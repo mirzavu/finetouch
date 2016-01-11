@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout>
+  <manageteam_adminhtml_manageteam_index>
+	<reference name="content">
+	  <block type="manageteam/adminhtml_manageteam" name="manageteam" />
+	</reference>
+  </manageteam_adminhtml_manageteam_index>
+</layout>

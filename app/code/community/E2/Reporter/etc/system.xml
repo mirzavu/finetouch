@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+  <tabs>
+    <e2 translate="label" >
+      <label>E2 specific</label>
+      <sort_order>1</sort_order>
+    </e2>
+  </tabs>
+  <sections>
+    <e2 translate="label" module="e2_reporter">
+      <label>Settings</label>
+      <tab>e2</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>1000000</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>0</show_in_website>
+      <show_in_store>0</show_in_store>
+      <groups>
+        <reporter translate="label">
+          <label>/var/report automatic processing</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>50</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>0</show_in_website>
+          <show_in_store>0</show_in_store>
+          <fields>
+            <notification_email translate="label">
+              <label>Emails to be notified of new error reports</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>51</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>0</show_in_website>
+              <show_in_store>0</show_in_store>
+            </notification_email>
+          </fields>
+        </reporter>
+      </groups>
+    </e2>
+  </sections>
+</config>
+

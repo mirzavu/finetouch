@@ -1,0 +1,9 @@
+<?php if(Mage::helper("b2borderlist")->showOrderList()){ ?>
+	<link media="all" href="<?php echo $this->getSkinUrl('b2borderlist/css/b2borderlist.css'); ?>" type="text/css" rel="stylesheet">
+<?php } ?>
+<?php $magentoVersion = Mage::getVersion(); ?>
+<?php if(version_compare($magentoVersion, '1.9', '>=')){ ?>
+	<link media="all" href="<?php echo $this->getSkinUrl('b2borderlist/css/category.css'); ?>" type="text/css" rel="stylesheet">
+<?php }else { ?>
+	<script src="<?php echo Mage::getBaseUrl('js') . 'b2borderlist/jquery.js' ?>" type="text/javascript">
+<?php } ?>

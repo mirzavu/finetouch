@@ -1,0 +1,18 @@
+/* Top */
+.credit-limit-top { background-color: #676157; border-bottom: 1px solid #fff; color: #fff; } 
+.credit-limit-top .main-container { padding-top: 5px; padding-bottom: 5px; } 
+.credit-limit-top .container > p { text-align: center; }
+.credit-limit-top .title { color: #fff; }
+.credit-limit-top ul { overflow: hidden; width: -moz-fit-content; width: -webkit-fit-content; width: fit-content; margin: auto; }
+.credit-limit-top ul li { float: left; margin-right: 15px; } 
+.credit-limit-top ul li:last-child { margin-right: 0; }
+.credit-limit-top ul li > img {margin: auto; max-width: 150px;} 
+/* End of Top*/
+/* Checkout */
+#payment_form_payonaccountplus li { background-color: #f4f4f4; border: 1px solid #ececec; overflow: hidden; padding: 10px; }
+#payment_form_payonaccountplus li > div { float: left; margin-right: 15px; }
+#payment_form_payonaccountplus li > div:last-child { margin-right: 0; }
+.payonaccountplus_checkbox { padding: 10px; width: 40px; }
+.payonaccountplus_logo { width: 150px; }
+.payonaccountplus_logo > img { max-width: 100%; }
+/* End of Checkout */

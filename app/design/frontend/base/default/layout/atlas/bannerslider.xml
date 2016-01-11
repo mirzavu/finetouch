@@ -1,0 +1,48 @@
+<layout version="0.1.0">
+    <default>
+	 
+        <reference name="head">
+            <action method="addJs" ifconfig="bannerconfig/bannerstatus/jqenable">
+                <script>Atlas/jquery.min.js</script>
+            </action>
+            <action method="addJs">
+                <script>Atlas/jquery.bxslider.js</script>
+            </action>
+            <action method="addJs">
+                <script>Atlas/jquery.bxslider.min.js</script>
+            </action>
+            <action method="addCss">
+                <stylesheet>atlas/css/atlasbanner.css</stylesheet>
+            </action>
+        </reference>
+        
+        <!-- <reference name="content">
+            <block type="bannerslider/sliderblock"  name="atlas_bannerslider" before="-" >
+                <action method="setTemplate" ifconfig="bannerconfig/bannerstatus/enabled">
+                    <template>atlas/bannerslider.phtml</template>
+                </action>
+                <action method="setData"><name>groupid</name><value>2</value></action>    
+            </block>
+        </reference> -->
+		  
+    </default>
+    <!-- <atlas_banner_index_index>
+        <reference name="content">
+            <block type="bannerslider/sliderblock"  name="atlas_bannerslider" template="atlas/bannerslider.phtml" />
+      	</reference>
+    </atlas_banner_index_index> 
+	  
+    <cms_index_index>
+        <reference name="content">
+            <block type="bannerslider/sliderblock"  name="atlas_bannerslider" before="-" >
+                <action method="setTemplate" ifconfig="bannerconfig/bannerstatus/enabled">
+                    <template>atlas/bannerslider.phtml</template>
+                </action>
+        		<action method="setData"><name>groupid</name><value>2</value></action>        
+            </block>
+        </reference> 
+		 
+    </cms_index_index> -->
+	
+	
+</layout>

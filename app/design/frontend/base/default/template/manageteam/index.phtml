@@ -1,0 +1,135 @@
+<?php
+$modname = Mage::app()->getRequest()->getModuleName();
+$controllerName = Mage::app()->getRequest()->getControllerName();
+$actionName = Mage::app()->getRequest()->getActionName();
+$baseUrl = $this->getBaseUrl();
+$redirectPath = $baseUrl . $modname . DS . $controllerName . DS . $actionName;
+$enable = Mage::getStoreConfig('manageteamsection/manageteamgroup/enable');
+$currId = $this->getRequest()->getParam('id');
+if ($enable) {
+    if ($currId != ''):
+        $currId = $this->getRequest()->getParam('id');
+        $collection = Mage::getModel('manageteam/manageteam')->load($currId);
+        $media_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+        $name = $collection->getName();
+        $designation = $collection->getDesignation();
+        $description = $collection->getDescription();
+        $facebookurl = $collection->getFacebookurl();
+        $googleurl = $collection->getGoogleurl();
+        $twitterurl = $collection->getTwitterurl();
+        $email = $collection->getEmail();
+        ?>
+        <div class="ourteam-view">
+            <div class="ourteam-detail">
+                <div class="team-block-left">
+                    <?php if ($collection->getImage()) { ?>
+                        <img src="<?php echo $media_url . $collection->getImage(); ?>" alt="<?php echo $this->htmlEscape($collection->getName()); ?>" />
+                    <?php } else { ?>
+                        <img src="<?php echo $this->getSkinUrl('images/manageteam/manageteam.jpg'); ?>" alt="<?php echo $this->htmlEscape($collection->getName()); ?>" />
+                    <?php } ?>
+                </div>
+                <div class="team-block-right">
+                    <?php if (!empty($name)): ?>
+                        <h2 class="ourteam-name">
+                            <b><?php echo Mage::helper('manageteam')->__('Name'); ?>: </b><?php echo $collection->getName(); ?>
+                        </h2>
+                    <?php endif; ?>
+                    <?php if (!empty($designation)): ?>
+                        <div class="ourteam-short_desc">
+                            <b><?php echo Mage::helper('manageteam')->__('Designation'); ?>: </b><?php echo $collection->getDesignation(); ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty($description)): ?>
+                        <div class="ourteam-description">
+                            <b><?php echo Mage::helper('manageteam')->__('Description'); ?>: </b><?php echo $collection->getDescription(); ?>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!empty($facebookurl)): ?>
+                        <div class="ourteam-short_desc">
+                            <b><?php echo Mage::helper('manageteam')->__('Facebook'); ?>: </b><a target="_new" href="<?php echo $collection->getFacebookurl(); ?>"><?php echo $collection->getFacebookurl(); ?></a>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty($googleurl)): ?>
+                        <div class="ourteam-short_desc">
+                            <b><?php echo Mage::helper('manageteam')->__('Google+'); ?>: </b><a target="_new" href="<?php echo $collection->getGoogleurl(); ?>"><?php echo $collection->getGoogleurl(); ?></a>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty($twitterurl)): ?>
+                        <div class="ourteam-short_desc">
+                            <b><?php echo Mage::helper('manageteam')->__('Twitter'); ?>: </b><a target="_new" href="<?php echo $collection->getTwitterurl(); ?>"><?php echo $collection->getTwitterurl(); ?></a>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (!empty($email)): ?>
+                        <div class="ourteam-short_desc">
+                            <b><?php echo Mage::helper('manageteam')->__('Email'); ?>: </b><a href="mailto:<?php echo $collection->getEmail(); ?>"><?php echo $collection->getEmail(); ?></a>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+        <div class="back-btn">
+            <a class="read-more" href="<?php echo $baseUrl . $modname; ?>" title="Back">
+                <?php echo __('Back'); ?>	
+            </a>
+        </div>
+    <?php else: ?>
+        <div class="page-title ourteam-title">
+            <h1><?php echo Mage::helper('manageteam')->__('Our Team') ?></h1>
+        </div>
+        <?php
+        //get collection of manageteam
+        $collection = $this->getCollection();
+        $size = $collection->getSize();
+        $media_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+        ?>
+        <?php if ($size > 0): ?>
+            <div class="ourteam-list-container">
+                <?php echo $this->getPagerHtml(); ?>
+                <ul class="team-wrapper">
+                    <?php foreach ($collection as $teamData): ?>
+                        <li class="ourteam-list-item">
+                            <div class="team-mem-img"
+                                 <a href="<?php echo $redirectPath . '/id/' . $teamData->getManageteam_id(); ?>" title="<?php echo $this->htmlEscape($teamData->getName()) ?>">
+                                         <?php if ($teamData->getImage()): ?>
+                                        <img class="member_avatar " src="<?php echo $media_url . $teamData->getImage(); ?>" alt="<?php echo $teamData->getName(); ?>" width="190" height="190"/>
+                                    <?php else: ?>
+                                        <img class="member_avatar" src="<?php echo $this->getSkinUrl('images/manageteam/manageteam.jpg') ?>" alt="<?php echo $teamData->getName(); ?>" width="190" height="190"/>
+                                    <?php endif; ?>
+                                </a>
+                            </div>
+                            <h2 class="full-name">
+                                <?php echo $teamData->getName(); ?>
+                            </h2>
+                            <?php if ($teamData->getDesignation()): ?>
+                                <div id="greg_description">(<?php echo $teamData->getDesignation(); ?>)</div>
+                            <?php endif; ?>
+                            <div class="social-icon">
+                                <?php if ($teamData->getFacebookurl()): ?>
+                                    <a target="_new" href="<?php echo $teamData->getFacebookurl(); ?>"><img src="<?php echo $this->getSkinUrl('images/manageteam/facebook.png') ?>"></a>
+                                <?php endif; ?>
+                                <?php if ($teamData->getGoogleurl()): ?>
+                                    <a target="_new" href="<?php echo $teamData->getGoogleurl(); ?>"><img src="<?php echo $this->getSkinUrl('images/manageteam/google-plus.png') ?>"></a>
+                                <?php endif; ?>
+                                <?php if ($teamData->getTwitterurl()): ?>
+                                    <a target="_new" href="<?php echo $teamData->getTwitterurl(); ?>"><img src="<?php echo $this->getSkinUrl('images/manageteam/twitter.png') ?>"></a>
+                                <?php endif; ?>
+                                <?php if ($teamData->getEmail()): ?>
+                                    <a target="_new" href="mailto:<?php echo $teamData->getEmail(); ?>"><img src="<?php echo $this->getSkinUrl('images/manageteam/mail.png') ?>"></a>
+                                <?php endif; ?>
+                            </div>
+                            <a class="read-more" href="<?php echo $redirectPath . '/id/' . $teamData->getManageteam_id(); ?>" title="<?php echo $this->htmlEscape($teamData->getName()) ?>">
+                                <?php echo __('Read More'); ?>	
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                    <?php
+                    ?>
+                </ul>
+                <?php echo $this->getPagerHtml(); ?>
+            </div>
+        <?php else : ?>
+            <?php echo Mage::helper('manageteam')->__('There are no team member found at this moment'); ?>
+        <?php endif; ?>
+    <?php endif; ?>
+<?php } ?>

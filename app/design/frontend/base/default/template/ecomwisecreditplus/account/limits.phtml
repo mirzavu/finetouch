@@ -1,0 +1,24 @@
+<?php $cretit_rules = $this->getCreditRules() ?>
+<div class="page-title">
+    <h1><?php echo $this->__('Credit Limits') ?></h1>
+</div>
+<?php if( count($cretit_rules) > 0){ ?>
+	<?php foreach ($cretit_rules as $rule){ ?>
+		<?php $used = $this->getUsedCredit( $rule->getId()   );?>
+		<?php $remaining = $rule->getAmount() - $used ?>				
+		<div>
+			<h4><?php echo $rule->getName()  ?></h4>
+			<div>
+				<span><?php echo Mage::helper("ecomwisecreditplus")->__('Used so Far:') ?> <?php echo Mage::helper('core')->currency($used, true, false);?> 
+					<?php echo Mage::helper("ecomwisecreditplus")->__('of') ?> <?php echo Mage::helper('core')->currency($rule->getAmount(), true, false);?> </span> 
+			</div>
+			<div>  
+				<span><?php echo Mage::helper("ecomwisecreditplus")->__('Remaining:') ?> <?php echo Mage::helper('core')->currency($remaining, true, false);?> </span>
+			</div>
+			<br />
+		</div>
+	<?php } ?>
+<?php } else { ?>
+	<p><?php echo Mage::helper("ecomwisecreditplus")->__('You have no Credit limits.') ?></p>
+<?php } ?>
+

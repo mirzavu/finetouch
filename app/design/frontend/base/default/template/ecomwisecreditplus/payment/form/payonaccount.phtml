@@ -1,0 +1,37 @@
+<?php 
+$_code=$this->getMethodCode();
+$rules_collection = $this->getCreditRules(); 
+?>
+<?php if(count($rules_collection)> 0){  ?>
+	<ul class="form-list" id="payment_form_<?php echo $_code ?>" style="display:none;">	
+	<?php foreach ($rules_collection as $rule) { ?>
+		<li>  	
+			<div class="payonaccountplus_checkbox">
+				<?php if( $this->getUsedAmount( $rule->getId() ) <= $rule->getAmount()  ){ ?>		
+					<input type="radio" class="radio payonaccountplus" title="<?php echo $rule->getName() ?>" id="<?php echo $_code . '_' . $rule->getId() ?>" name="payment[payonaccountplus_option]"  value="<?php echo $rule->getId() ?>" >
+				<?php } else { ?>			
+					<span> </span>			
+				<?php } ?>	
+			</div>
+			<?php if($rule->getLogo() ){ ?>
+				<div class="payonaccountplus_logo">
+					<img alt="<?php echo $rule->getName() ?>" src="<?php echo $rule->getLogo() ?>">		
+				</div>
+			<?php } ?>
+			<div class="payonaccountplus_description">			
+				<?php $used = $this->getUsedCredit( $rule->getId() );?>
+				<?php $remaining = $rule->getAmount() - $used ?>
+				<label for="<?php echo $_code . '_' . $rule->getId() ?>">
+					<?php echo $this->__('You have used') ?>
+					<?php echo Mage::helper('core')->currency($used, true, false)   ?>
+					<?php echo $this->__('of') ?>
+					<?php echo Mage::helper('core')->currency( $rule->getAmount(), true, false ) ?>			
+					<br />
+					<?php echo $this->__('Remaining:') ?>
+					<?php echo Mage::helper('core')->currency($remaining, true, false) ?>			
+				</label>			
+			</div>       
+	    </li>
+	<?php }?>
+	</ul>
+<?php } ?>

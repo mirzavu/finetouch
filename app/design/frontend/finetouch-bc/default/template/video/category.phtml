@@ -1,0 +1,58 @@
+<div class="page-title">
+    <h1><?php echo $this->__('Video Category') ?></h1>
+</div>
+<?php
+$collection = $this->getCollection();
+$cnt = count($collection);
+if($cnt > 0 ): 
+?>
+<div style="position: absolute;">
+<?php echo $this->getPagerHtml(); ?></div>
+<div class="fleft">
+	<?php $width = '135';
+            $height = '135'; ?>
+            <ul class="gallery clearfix">
+				<?php foreach ($collection as $item): ?>                  
+				<li>
+				<?php
+					if($item->getFilename()){ 
+                    // resize image
+                    $imageUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA). $item->getFilename();
+                  	if(!file_exists("../media/video/category/resized"))
+                    mkdir("../media/video/category/resized",0777);
+                    $imageName = substr(strrchr($imageUrl,"/"),1);
+                    $imageResized = Mage::getBaseDir('media').DS."video".DS."category".DS."resized".DS.$imageName;
+                    $dirImg = Mage::getBaseDir().str_replace("/",DS,strstr($imageUrl,'/media'));
+                    if (!file_exists($imageResized)&& file_exists($dirImg)) :
+                    $imageObj = new Varien_Image ($dirImg);
+                    $imageObj->constrainOnly(true);
+                    $imageObj->keepAspectRatio(false);
+                    $imageObj->keepFrame(false);
+                    $imageObj->quality(100);
+                    $imageObj->resize(135, 135);
+                    $imageObj->save($imageResized);
+                    endif;
+                    $newImageUrl = Mage::getBaseUrl('media')."video/category/resized/".$imageName;
+                   //end resize
+					}else{ $newImageUrl = $this->getSkinUrl('hetvideo/images/no-image.jpg'); }
+				   ?>
+                    	<?php if($item->getFilename()){ ?>
+						<a class="image_gal" href="<?php echo Mage::getUrl('video');?>category/?cat=<?php echo $item->getCategoryId(); ?>">
+							<img src="<?php echo $newImageUrl; ?>" title="<?php echo $item->getTitle();?>" alt="<?php echo $item->getTitle(); ?>" width="135" height="135"/>
+						</a>
+						<?php }else{ ?>
+                        <div class="videobox">
+							<a class="image_gal" href="<?php echo Mage::getUrl('video');?>category/?cat=<?php echo $item->getCategoryId(); ?>">	
+							<img class="video-placeholder" src="<?php echo $this->getSkinUrl('hetvideo/images/no-image.jpg') ?>">
+							</a>
+                        </div>
+                        <?php } ?>
+                        <h2><a href="<?php echo Mage::getUrl('video');?>category/?cat=<?php echo $item->getCategoryId(); ?>" title="<?php echo $item->getTitle();?>"><?php $vname = $item->getTitle();?><?php if (strlen($vname) > 15){ $str = substr($vname, 0, 15) . '...'; echo $str;}else{echo $vname;} ?></a></h2>
+				</li>
+				<?php endforeach;  ?> 
+			</ul>
+			</div>
+<?php //echo $this->getPagerHtml(); ?>
+<?php else: ?>
+	<div><p class="note-msg"><?php echo $this->__('There are no Category here.') ?></p></div>
+<?php endif; ?>

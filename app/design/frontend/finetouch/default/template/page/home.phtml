@@ -1,0 +1,141 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for Mage_Page_Block_Html
+ */
+?>
+
+<!DOCTYPE html>
+
+<!--[if lt IE 7 ]> <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="<?php echo $this->getLang(); ?>" id="top" class="no-js"> <!--<![endif]-->
+
+<head>
+<?php echo $this->getChildHtml('head') ?>
+<script>
+jQuery(document).ready(function(){jQuery(".press_news").bxSlider({auto: false, autoControls: false, pager:false});});
+</script>
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/owl.carousel.css" type="text/css" />
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/owl.theme.css" type="text/css" />
+<script src="<?php echo $this->getSkinUrl(); ?>js/owl.carousel.js"></script>
+<script src="<?php echo $this->getSkinUrl(); ?>js/jquery_003.js"></script>
+
+
+</head>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+<div class="wrapper">
+    <?php echo $this->getChildHtml('global_notices') ?>
+    <div class="page">
+        <?php echo $this->getChildHtml('header') ?>
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homebanner')->toHtml();?>
+		
+		<div class="home-banner-btm">
+		<div class="main-container-layout">
+		<div class="col-25 ft_left promo_home">
+		<div class="home-qty">
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homequality')->toHtml();?>
+		</div>
+		</div>
+		<div class="col-25 ft_left home-fast promo_home"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homefastshipping')->toHtml();?></div>
+		<div class="col-25 ft_left home-online promo_home"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homeonlinespecials')->toHtml();?></div>
+		<div class="col-25 ft_left home-customer promo_home"><?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homercustomersupport')->toHtml();?></div>
+		</div>
+		</div>
+		
+		<div class="clear"></div>
+		
+        <div class="main-container col1-layout home-container">
+            <div class="main">
+                <?php echo $this->getChildHtml('breadcrumbs') ?>
+                <div class="col-main">
+                    <?php echo $this->getChildHtml('global_messages') ?>
+                    <?php echo $this->getChildHtml('content') ?>
+					
+                </div>
+            </div>
+        </div>
+		<div class="clear"></div>
+		
+		<div class="home-main-container-middle">
+		<div class="main-container-layout">
+		
+		  <div class="col-33 ft_left offr_home">
+		    <div class="credit-acc">
+			  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homecreditaccount')->toHtml();?>
+			</div>
+		  </div>
+		  
+		  <div class="col-33 ft_left offr_home">
+		    <div class="shop-online">
+			  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homeshoponline')->toHtml();?>
+			</div>
+		  </div>
+		  
+		  <div class="col-33 ft_right offr_home">
+		    <div class="online-spl">
+			  <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homeonlinespecial')->toHtml();?>
+			</div>
+		  </div>
+		  
+		  
+		</div>
+		</div>
+		<div class="clear"></div>
+		<div class="home-feature-product">
+		<div class="main-container-layout">
+		<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homefeaturedproducts')->toHtml();?>
+		</div>
+		</div>
+		
+		<div class="main-container-btm">
+		 <div class="main-container-layout">
+         <div class="col-45 ft_left home-video">
+		 <h2>Latest Video <a href="<?php echo Mage::getBaseUrl()."video";?>">VIEW MORE</a></h2>
+		 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homevideo')->toHtml();?></div>
+         <div class="col-50 ft_right home-press">
+		 <h2>Press Release <a href="<?php echo Mage::getBaseUrl()."news";?>">VIEW MORE</a></h2>
+		 <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('homepressrelese')->toHtml();?>
+		 </div>		 
+		</div>
+		
+		</div>
+		
+        <?php echo $this->getChildHtml('footer_before') ?>
+        <?php echo $this->getChildHtml('footer') ?>
+        <?php echo $this->getChildHtml('global_cookie_notice') ?>
+        <?php echo $this->getChildHtml('before_body_end') ?>
+    </div>
+</div>
+<?php echo $this->getAbsoluteFooter() ?>
+</body>
+</html>
+

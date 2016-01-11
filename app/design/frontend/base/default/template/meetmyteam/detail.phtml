@@ -1,0 +1,65 @@
+<?php 
+$id = Mage::app()->getRequest()->getParam('id');
+
+$item = Mage::getModel('meetmyteam/meetmyteam')->load($id);
+?>
+<?php
+$category = Mage::getModel('meetmyteam/category')->load($item->getCategory());
+?>
+<?php 
+$detailUrl = Mage::getUrl('meetmyteam/index/category',array('id'=>$item->getCategory()));
+?>
+<?php
+// get breadcrumbs block
+$breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+// add first item with link
+$breadcrumbs->addCrumb(
+'home',
+ array(
+'label'=>$this->__('Home'),
+'title'=>$this->__('Home'),
+'link'=>Mage::getUrl('meetmyteam')
+)
+);
+
+
+$breadcrumbs->addCrumb(
+'category',
+ array(
+'label'=> $this->__($category->getTitle()),
+'title'=> $this->__($category->getTitle()),
+'link'=> $detailUrl
+)
+);
+
+// add third item without link
+$breadcrumbs->addCrumb(
+'unlink',
+ array(
+'label'=>$this->__($item->getTitle()),
+'title'=>$this->__($item->getTitle()),
+)
+);
+echo $breadcrumbs->toHtml();
+?>
+<div class="meetmyteam-detail">
+<?php
+$url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB);
+echo "<img width='250px' height='250px' title='". $item->getTitle() ."' alt='". $item->getTitle() ."' src='".$url."media".DS.$item->getFilename()."'/>";
+echo "<h4>  ".$item->getTitle()."</h4>"; 
+
+echo "<h6>";
+echo $item->getDescription();
+echo "</h6>";
+echo "<p>";
+echo $item->getContent();
+echo "</p>";
+
+?>
+
+</div>
+
+<a class="detail-back" href="<?php echo $detailUrl; ?>">&lt; Back </a><br/>
+
+
+

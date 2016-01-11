@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <E2_Reporter>
+            <active>true</active>
+            <codePool>community</codePool>
+        </E2_Reporter>
+    </modules>
+</config>

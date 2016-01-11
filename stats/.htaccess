@@ -1,0 +1,7 @@
+AuthName "v2.finetouch.co.nz statistics"
+AuthType Basic
+AuthUserFile /home/v2.finetouch.co.nz/.stats-htpasswd
+require valid-user
+<Files .stats-htpasswd>
+deny from all
+</Files>

@@ -1,0 +1,18 @@
+<?php $categories = $this->getCategoryList(); 
+$size = $categories->getSize();
+if($size > 0):
+?>
+<h4>
+	<?php echo $this->__('Team Member') ?>
+</h4>
+<ul>
+<?php 
+foreach ($categories as $category) {
+	echo "<li>";
+	$detailUrl = Mage::getUrl('meetmyteam/index/category',array('id'=>$category->getMeetmyteamCatId()));
+	echo "<a href='".$detailUrl."'>".$category->getTitle()." </a>";
+	echo "</li>";
+}
+?>
+</ul>
+<?php endif; ?>

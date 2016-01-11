@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Webshopapps_Tieredproducts>
+            <version>0.0.1</version>
+        </Webshopapps_Tieredproducts>
+    </modules>
+
+    <global>
+        <models>
+            <catalog>
+                <rewrite>
+                    <product_type_configurable_price>Webshopapps_Tieredproducts_Model_Product_Type_Configurable_Price</product_type_configurable_price>
+                </rewrite>
+            </catalog>
+            <catalog>
+                <rewrite>
+                    <product_type_price>Webshopapps_Tieredproducts_Model_Product_Type_Price</product_type_price>
+                </rewrite>
+            </catalog>
+            <bundle>
+                <rewrite>
+                    <product_price>Webshopapps_Tieredproducts_Model_Product_Price</product_price>
+                </rewrite>
+            </bundle>
+        </models>
+        <resources>
+	     <tieredproducts_setup>
+	        <setup>
+	          <module>Webshopapps_Tieredproducts</module>
+	        </setup>
+	        <connection>
+	          <use>core_setup</use>
+	        </connection>
+	      </tieredproducts_setup>
+	    </resources>
+    </global>
+</config> 

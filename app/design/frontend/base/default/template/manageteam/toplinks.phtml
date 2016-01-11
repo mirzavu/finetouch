@@ -1,0 +1,16 @@
+
+<?php if (Mage::getStoreConfig('manageteamsection/manageteamgroup/enable') && Mage::getStoreConfig('manageteamsection/manageteamgroup/topmenu')): ?>
+    <div id="manageteam_container" style="display: none">
+        <li class="level0 nav-3 last level-top">
+            <a href="<?php echo $this->getUrl('manageteam') ?>">
+                <span><?php echo $this->__('Our Team') ?></span>
+            </a>
+        </li>    
+    </div>
+    <script type="text/javascript">
+        var menu = $('nav');
+        if (menu) {
+            menu.insert($('manageteam_container').innerHTML);
+        }
+    </script>
+<?php endif; ?>

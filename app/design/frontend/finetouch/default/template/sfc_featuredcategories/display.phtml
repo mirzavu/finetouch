@@ -1,0 +1,80 @@
+<?php
+/**
+ * SFC - Featured Catagories Extension
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to support@storefrontconsulting.com so we can send you a copy immediately.
+ *
+ *
+ * @package    SFC_FeaturedCategories
+ * @copyright  (C)Copyright 2010 StoreFront Consulting, Inc (http://www.StoreFrontConsulting.com/)
+ * @author     Adam Lundrigan
+ */
+
+$_categories = $this->getFeaturedCategories();
+$_catNo = 0;
+?>
+		<?php
+		$cats = array();
+		foreach ( $_categories as $cat ) {
+			$cats[] = $cat['Category'];
+		}
+		
+		function sortcats($a,$b) {
+			$adata = $a->getData();
+			$bdata = $b->getData();
+			return ($adata['position'] > $bdata['position']) ? +1 : -1;
+		}
+		
+		usort($cats, 'sortcats');
+		
+		
+		foreach ( $cats as $FeaturedGroup ) {
+    		if ( isset($FeaturedGroup) ) {
+		?>
+        
+         <div class="col  <?php if(($_catNo++ % 6) == 5) echo 'last'; ?>">
+        <h3><a href="<?php echo $FeaturedGroup->getUrl(); ?>"><?php echo $FeaturedGroup->getName(); ?></a></h3>
+<?php list($width, $height, $type, $attr) = getimagesize( $FeaturedGroup->getImageUrl()); ?>        
+<img 
+							src="<?php echo $FeaturedGroup->getImageUrl(); ?>" 
+							border="0"
+							height="<?php echo $height; ?>"
+							width="<?php echo $width; ?>"
+							alt="View <?php echo $FeaturedGroup->getName() ?>" />
+        <?php echo $FeaturedGroup->getDescription(); ?>
+        <a href="<?php echo $FeaturedGroup->getUrl(); ?>"><img alt="learn more" src="<?php echo $this->getSkinUrl('/images/btn_learn_more.png');?>" width="125" height="40" /></a>
+        </div>
+       <?php }} ?> 
+        
+		
+		
+		<script type="text/javascript">
+		<!--
+		//document.observe("dom:loaded", function() {
+		window.onload = function() {
+			var count = 0;
+			var maxHeight = new Array();
+			$$('.featured-cat').each(function(item){
+				if ( maxHeight[Math.floor(count/4)] == undefined ) maxHeight[Math.floor(count/4)] = 0;
+				if ( item.getHeight() > maxHeight[Math.floor(count/4)] )
+					maxHeight[Math.floor(count/4)] = item.getHeight();
+				count++;
+			});
+		
+			count = 0;
+        		$$('.featured-cat').each(function(item){
+                		item.setStyle({height:maxHeight[Math.floor(count/4)] + 'px'});
+                		count++;
+        		});
+		};
+		-->
+		</script>
+

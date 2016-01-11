@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   SKJ
+ * @package    SKJ_Meetmyteam
+ * @author     Sanjeev Kumar Jha <jha.sanjeev.in@gmail.com>
+ * @website    http://www.sanjeevkumarjha.com.np
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<layout version="0.1.0">
+
+<!-- Display list of category in left sidebar -->
+   <default>
+   		<reference name="head">               
+               <action method="addCss"><stylesheet>css/skj-myteam.css</stylesheet></action>               
+        </reference>
+		<reference name="left">
+			<block type="meetmyteam/category" name="left.myteam" before="-" template="meetmyteam/category_box.phtml">                
+            </block>      
+		</reference>
+	</default>
+	 
+	<!-- Display member by category -->
+	<meetmyteam_index_category>
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+        <reference name="content">
+            <block type="meetmyteam/category" name="meetmyteam" template="meetmyteam/category.phtml" />
+        </reference>
+    </meetmyteam_index_category>
+    
+    <!-- Display all member -->
+    <meetmyteam_index_index>
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+        <reference name="content">
+            <block type="meetmyteam/meetmyteam" name="meetmyteam" template="meetmyteam/meetmyteam.phtml" />
+        </reference>
+    </meetmyteam_index_index>
+        
+    <!-- Display detail of member -->
+     <meetmyteam_index_detail>
+		<reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+        <reference name="content">
+            <block type="meetmyteam/meetmyteam" name="meetmyteam" template="meetmyteam/detail.phtml" />
+        </reference>
+    </meetmyteam_index_detail>
+    
+</layout> 

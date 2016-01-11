@@ -1,0 +1,60 @@
+<script type="text/javascript">
+function MyValVideo(obj)
+{
+	var Myval=obj.title;
+
+	var Defltval='http://www.youtube.com/embed/';
+
+	var MainMYValVdeo=Defltval+Myval;
+
+	document.getElementById('MyUtubeFrame').src=MainMYValVdeo;
+}
+</script>
+<?php
+$playlist_id = Mage::getStoreConfig('hetinfoway_video/hetinfoway_vgroup/youtubeplaylist');
+if($playlist_id){
+	$url = "https://gdata.youtube.com/feeds/api/playlists/".$playlist_id."?v=2&alt=json";
+	$data = json_decode(file_get_contents($url),true);
+
+	$info = $data["feed"];
+	$video = $info["entry"];
+	$nVideo = count($video);
+	for($i=0;$i<$nVideo;$i++){
+	if($i==1){ break;}
+	$abc = substr( strstr($video[$i]['link'][0]['href'], '='),1,100);
+	 substr( $abc, 0, strpos( $abc, '&' ) );
+	$abcdef=substr( $abc, 0, strpos( $abc, '&' ) );
+	$_session['myfirstvideo_url']=$abcdef;
+	$_session['myfirstvideo_url'];
+	}
+?>
+<div class="video-title">
+   <h1><?php echo $this->__('Playlist Video')?></h1>
+</div>
+	<div class="framevideo">
+		<iframe id="MyUtubeFrame" style="width:600px; height:400px;" src="http://www.youtube.com/embed/<?php echo $_session['myfirstvideo_url'];?>" frameborder="0" allowfullscreen></iframe>
+	</div>
+	<div class="fleft">
+		 <ul class="gallery clearfix">
+			<?php 
+			for($i=0;$i<$nVideo;$i++){
+				echo '<li>';
+				  $videotitle=$video[$i]['title']['$t'];
+
+				$myimg= "<img class='VdothumbImg' width='160' height='135' alt='$videotitle' title='$videotitle' src='".$video[$i]['media$group']['media$thumbnail'][1]['url']."' />";
+				$abc = substr( strstr($video[$i]['link'][0]['href'], '='),1,100);
+				 substr( $abc, 0, strpos( $abc, '&' ) );
+				$abcdef=substr( $abc, 0, strpos( $abc, '&' ) );
+				 
+				 ?>
+				<a href="javascrip:void(0);" class='MyvdoUrk' title="<?php echo substr( $abc, 0, strpos( $abc, '&' ) )?>" onclick=MyValVideo(this);><?php echo $myimg; ?></a>
+				
+				<span class="MyvdoTitle"><?php echo $videotitle; ?></span>
+				
+				</li>
+			<?php } ?>
+		</ul>
+	</div>
+<?php }else{ ?>
+	<p class="note-msg"><?php echo $this->__('There are no importing video from backend.') ?></p>
+	<?php }  ?>

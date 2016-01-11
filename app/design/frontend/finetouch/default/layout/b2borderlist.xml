@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			   <!-- <action method="addCss"><stylesheet>css/b2borderlist.css</stylesheet></action> -->			   
+			   <!-- <block type="page/html_head" name="orderlist.css" template="b2borderlist/css.phtml" /> -->			   
+			   <!-- <action method="addJs"><script>b2borderlist/jquery.js</script></action> -->
+			   <block type="page/html_head" name="orderlist.head" template="b2borderlist/head.phtml" />	
+			   
+		</reference>
+		<reference name="after_body_start">
+			<block type="b2borderlist/hidepricecss" name="orderlist.hideprice.css" as="orderlist.hideprice.css"/>
+		</reference>
+	</default>	
+	<customer_account_login>	
+		<reference name="content">
+			<remove name="customer_form_login"/>		
+			<block type="customer/form_login" name="orderlist.login" template="b2borderlist/login.phtml" />		 
+		</reference>	
+	</customer_account_login>
+	<catalog_category_default>
+		 <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>  
+            <action method="addJs"><script>b2borderlist/b2borderlist_configurable.js</script></action>
+            <action method="addJs"><script>b2borderlist/b2borderlist_bundle.js</script></action>
+            <action method="addJs"><script>b2borderlist/custom.js</script></action>
+           </reference>                      
+           <reference name="content">           
+           		<reference name="category.products">           
+          			<remove name="product_list_toolbar"/>
+           				<reference name="product_list">          				
+           				<block type="b2borderlist/product_list_toolbar" name="product_list_toolbar_order_list" template="catalog/product/list/toolbar.phtml">
+	                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+	                        <!-- The following code shows how to set your own pager increments -->
+	                        <!--
+	                            <action method="setDefaultListPerPage"><limit>4</limit></action>
+	                            <action method="setDefaultGridPerPage"><limit>9</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+	                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+	                        -->	                       
+                   		 </block>           				
+           				<action method="setToolbarBlockName"><name>product_list_toolbar_order_list</name></action>
+           			</reference>
+           		</reference>          
+           </reference>           
+	</catalog_category_default>	
+	<catalog_category_layered>
+		 <reference name="head">
+          <action method="addJs"><script>varien/product.js</script></action> 
+            <action method="addJs"><script>b2borderlist/b2borderlist_configurable.js</script></action>
+             <action method="addJs"><script>b2borderlist/b2borderlist_bundle.js</script></action>
+             <action method="addJs"><script>b2borderlist/custom.js</script></action>
+           </reference>
+           <reference name="content">           
+           		<reference name="category.products">           
+          			<remove name="product_list_toolbar"/>
+           				<reference name="product_list">          				
+           				<block type="b2borderlist/product_list_toolbar" name="product_list_toolbar1" template="catalog/product/list/toolbar.phtml">
+	                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+	                        <!-- The following code shows how to set your own pager increments -->
+	                        <!--
+	                            <action method="setDefaultListPerPage"><limit>4</limit></action>
+	                            <action method="setDefaultGridPerPage"><limit>9</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+	                            <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+	                            <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+	                        -->	                       
+                   		 </block>           				
+           				<action method="setToolbarBlockName"><name>product_list_toolbar1</name></action>
+           			</reference>
+           		</reference>          
+           </reference>     
+	</catalog_category_layered>	
+	<catalogsearch_result_index translate="label">       
+        <reference name="content">
+            <reference name="search.result">
+                <reference name="search_result_list">
+                    <block type="b2borderlist/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+                </reference>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/>
+            </reference>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

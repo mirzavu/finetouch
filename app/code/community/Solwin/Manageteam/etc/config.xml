@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Solwin_Manageteam>
+            <version>1.0.1</version>
+        </Solwin_Manageteam>
+    </modules>
+    <frontend>
+        <routers>
+            <manageteam>
+                <use>standard</use>
+                <args>
+                    <module>Solwin_Manageteam</module>
+                    <frontName>manageteam</frontName>
+                </args>
+            </manageteam>
+        </routers>
+        <layout>
+            <updates>
+                <manageteam>
+                    <file>manageteam.xml</file>
+                </manageteam>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <helpers>
+            <manageteam>
+                <class>Solwin_Manageteam_Helper</class>
+            </manageteam>
+        </helpers>
+        <blocks>
+            <manageteam>
+                <class>Solwin_Manageteam_Block</class>
+            </manageteam>
+        </blocks>
+        <models>
+            <manageteam>
+                <class>Solwin_Manageteam_Model</class>
+                <resourceModel>manageteam_mysql4</resourceModel>
+            </manageteam>
+            <manageteam_mysql4>
+                <class>Solwin_Manageteam_Model_Mysql4</class>
+                <entities>		  
+                    <manageteam>
+                        <table>manageteam</table>
+                    </manageteam>
+                </entities>
+            </manageteam_mysql4>
+        </models>
+        <resources>
+            <manageteam_setup>
+                <setup>
+                    <module>Solwin_Manageteam</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </manageteam_setup>
+            <manageteam_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </manageteam_write>
+            <manageteam_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </manageteam_read>
+        </resources>
+    </global>
+    <adminhtml>
+        <menu>
+            <manageteam module="manageteam">
+                <title>Our Team</title>
+                <sort_order>100</sort_order>
+                <children>
+                    <manageteam module="manageteam">
+                        <title>Manage Our Team</title>
+                        <sort_order>10</sort_order>
+                        <action>manageteam/adminhtml_manageteam</action>
+                    </manageteam>
+                </children>
+            </manageteam>
+        </menu>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <manageteam translate="title" module="manageteam">
+                            <title>Our Team</title>
+                            <sort_order>1000</sort_order>
+                            <children>
+                                <manageteam translate="title">
+                                    <title>Our Team</title>
+                                    <sort_order>10</sort_order>
+                                </manageteam>
+                            </children>
+                        </manageteam>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <layout>
+            <updates>
+                <manageteam>
+                    <file>manageteam.xml</file>
+                </manageteam>
+            </updates>
+        </layout>
+    </adminhtml>
+</config> 

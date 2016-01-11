@@ -1,0 +1,21 @@
+<?php
+$collection = $this->getCollection();
+$cnt = count($collection);
+if($cnt > 0 ): 
+?>
+<div class="left">
+	<p><?php echo $this->__('Video Category') ?></p>
+	<ul class="leftgallery">
+		<?php foreach ($collection as $item): ?>                  
+		<li>
+		      <a href="<?php echo Mage::getUrl('video');?>category/?cat=<?php echo $item->getCategoryId(); ?>" title="<?php echo $item->getTitle();?>">
+					<?php $vname = $item->getTitle();?><?php if (strlen($vname) > 15){ $str = substr($vname, 0, 15) . '...'; echo $str;}else{echo $vname;} ?>
+			   </a>
+		</li>
+		<?php endforeach;  ?> 
+		<li>
+			<a href="<?php echo Mage::getUrl('video-gallery');?>"><?php echo $this->__('All Video') ?></a>
+		</li>
+	</ul>
+</div>
+<?php endif; ?>

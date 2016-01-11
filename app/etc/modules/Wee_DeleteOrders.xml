@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Wee_DeleteOrders>
+            <active>false</active>
+            <codePool>community</codePool>
+        </Wee_DeleteOrders>
+    </modules>
+</config>

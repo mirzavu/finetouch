@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Webshopapps_Tieredproducts>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Webshopapps_Tieredproducts>
+    </modules>
+</config>

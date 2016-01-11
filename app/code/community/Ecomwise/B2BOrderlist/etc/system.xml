@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+       <ecomwise translate="label">
+            <label><![CDATA[<div style="position: absolute;"><img id="ecomwise_block" src="" alt="" border="0" /></div>&nbsp;<script>$('ecomwise_block').src = SKIN_URL + "images/ecomwise/extensions_logo.png";</script>]]></label>
+            <sort_order>100</sort_order>
+        </ecomwise>
+    </tabs> 
+    <sections>
+        <b2borderlist translate="label" module="b2borderlist"> 
+				<label>B2B Order List</label>
+				<tab>ecomwise</tab>
+				<frontend_type>text</frontend_type>
+				<sort_order>90</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+            <groups>
+                <info translate="label">
+                    <label>Info &amp; Support</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<version translate="label">
+	                        <label>B2B Order Lis</label>
+                            <frontend_type>select</frontend_type>
+                            <frontend_model>b2borderlist/adminhtml_support</frontend_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </version>
+                  </fields>
+                </info>
+                <settings translate="label">
+          			<label>License</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>2</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<serial translate="label">
+							<label>License Key</label>
+	                        <frontend_type>text</frontend_type>
+	                        <sort_order>10</sort_order>
+	                        <show_in_default>1</show_in_default>
+	                        <show_in_website>1</show_in_website>
+	                        <show_in_store>1</show_in_store>
+		                </serial>                   
+		            </fields>
+				</settings>                
+                <parameters translate="label">
+                    <label>Settings</label>
+                    <sort_order>775</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                    	<active translate="label">
+                            <label>Extension Enabled</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>                        
+                       <!-- <b2bstore>
+                        	<label>Set B2B Store</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>b2borderlist/source_store</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                         </b2bstore> -->                         
+                         <forcelogin>
+                        	<label>Use Force Login</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                         </forcelogin>                         
+                         <applyhighestrule translate="label">
+	                        <label>Apply highest discount</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </applyhighestrule>                          
+                         <register>
+                        	<label>Login type</label>
+                            <frontend_type>select</frontend_type>
+							<source_model>b2borderlist/source_logintype</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                         </register>                           
+                         <landing translate="label">
+			            	<label>Landing page after login</label>			            	
+			              	<frontend_type>select</frontend_type>
+			              	<source_model>b2borderlist/source_landing</source_model>
+			              	<sort_order>70</sort_order>
+			              	<show_in_default>1</show_in_default>
+			              	<show_in_website>1</show_in_website>
+			              	<show_in_store>1</show_in_store>
+			            </landing>
+                        <groups translate="label">
+			            	<label>Customer Groups</label>
+			            	<comment>
+			                	<![CDATA[Select Customer Group]]>
+			              	</comment>
+			              	<frontend_type>Multiselect</frontend_type>
+			              	<source_model>b2borderlist/source_customergroup</source_model>
+			              	<sort_order>80</sort_order>
+			              	<show_in_default>1</show_in_default>
+			              	<show_in_website>1</show_in_website>
+			              	<show_in_store>1</show_in_store>
+			            </groups>
+			            <per_page_values translate="label comment">
+			            	<label>Products per Page on Order List Allowed Values</label>
+			            	<comment>
+			                	<![CDATA[Comma-separated.]]>
+			              	</comment>
+			              	<frontend_type>text</frontend_type>
+			              	<sort_order>90</sort_order>
+			              	<show_in_default>1</show_in_default>
+			              	<show_in_website>1</show_in_website>
+			              	<show_in_store>1</show_in_store>			              	
+			              	<validate>validate-per-page-value-list-fix</validate>			              	
+			            </per_page_values>   
+			            <per_page translate="label comment">
+                            <label>Products per Page on Order List Default Value</label>
+                            <comment>Must be in the allowed values list.</comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-per-page-value validate-greater-than-zero</validate>
+                            <!--<source_model>adminhtml/system_config_source_catalog_gridPerPage</source_model>-->
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </per_page>
+                        <allow_all translate="label comment">
+                            <label>Allow All Products per Page</label>
+                            <comment>Whether to show "All" option in the "Show X Per Page" dropdown.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allow_all>  
+                        <list_mode translate="label">
+                            <label>List Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>b2borderlist/adminhtml_system_config_listMode</source_model>
+                            <sort_order>120</sort_order>
+                            <comment>overrides Catalog -> Frontend -> List Mode</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </list_mode> 		                                  
+                    </fields>
+                </parameters>	                
+                <categories translate="label">
+                    <label>Enable on Categories</label>
+                    <sort_order>780</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                    
+                    	<enabled translate="label">
+	                        <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>                        
+                         <categories translate="label">
+	                        <label>Enable on Categories</label>
+                            <frontend_type>Multiselect</frontend_type>
+                            <source_model>b2borderlist/source_category</source_model>
+                            <depends><enabled>1</enabled></depends>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </categories> 
+                    </fields>                    
+                </categories>                                			
+            </groups>
+        </b2borderlist>
+    </sections>
+</config>

@@ -1,0 +1,63 @@
+<?php
+	$videocollection = Mage::getModel('video/video')->getCollection()
+						->addFieldToFilter('status', 1)
+						->addFieldToFilter('vfeatured', 0)
+						->setOrder('vsort_order', 'asc');
+	if (count($videocollection) > 0){
+?>
+      <!-- <div class="video-title">
+               <h1><?php echo $this->__('Featured Video')?></h1>
+       </div>-->
+        <div class="fleft">
+            <?php $width = Mage::getStoreConfig('hetinfoway_video/hetinfoway_vgroup/width');
+            $height = Mage::getStoreConfig('hetinfoway_video/hetinfoway_vgroup/height'); ?>
+            <ul class="gallery clearfix">
+        <?php foreach ($videocollection as $k => $v): ?>
+		        <li>
+                <?php
+					if($v->getVimage()){ 
+                    // resize image
+                    $imageUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA). $v->getVimage();
+                  	if(!file_exists("../media/video/resized"))
+                    mkdir("../media/video/resized",0777);
+                    $imageName = substr(strrchr($imageUrl,"/"),1);
+                    $imageResized = Mage::getBaseDir('media').DS."video".DS."resized".DS.$imageName;
+                    $dirImg = Mage::getBaseDir().str_replace("/",DS,strstr($imageUrl,'/media'));
+                    if (!file_exists($imageResized)&& file_exists($dirImg)) :
+                    $imageObj = new Varien_Image ($dirImg);
+                    $imageObj->constrainOnly(true);
+                    $imageObj->keepAspectRatio(false);
+                    $imageObj->keepFrame(false);
+                    $imageObj->quality(100);
+                    $imageObj->resize(200, 135);
+                    $imageObj->save($imageResized);
+                    endif;
+                    $newImageUrl = Mage::getBaseUrl('media')."video/resized/".$imageName;
+                   //end resize
+					}else{ $newImageUrl = $this->getSkinUrl('hetvideo/images/no-image.jpg'); }
+				   ?>
+                		<?php if($v->getVimage()){ ?>
+                        
+						<!-- <a href="http://www.youtube.com/watch?v=<?php echo $v->getVcode(); ?>" rel="prettyPhoto" title="<?php echo $v->getVname();?>">
+							<img src="<?php echo $newImageUrl; ?>" title="<?php echo $v->getVname();?>" alt="<?php echo $v->getVname(); ?>" width="160" height="135"/></a>-->
+							<iframe width="100%" height="205px" src="http://www.youtube-nocookie.com/embed/<?php echo $v->getVcode(); ?>?wmode=opaque&rel=0&autohide=1&showinfo=0&autoplay=0" frameborder="0" allowfullscreen></iframe><b><?php echo $v->getVname();?></b>
+							 <?php }else{ ?>
+                        <div class="videobox"><iframe width="<?php echo $width; ?>" height="<?php echo $height; ?>" src="http://www.youtube-nocookie.com/embed/<?php echo $v->getVcode(); ?>?wmode=opaque&rel=0&autohide=1&showinfo=0&autoplay=0" frameborder="0" allowfullscreen></iframe><b><?php echo $v->getVname();?></b></div>
+                        <?php } ?>
+                    
+                   <!-- <h2><a href="http://www.youtube.com/watch?v=<?php echo $v->getVcode(); ?>" rel="prettyPhoto" title="<?php echo $v->getVname();?>"><?php $vname = $v->getVname();?><?php if (strlen($vname) > 15){ $str = substr($vname, 0, 15) . '...'; echo $str;}else{echo $vname;} ?></a></h2>-->
+                </li>
+        <?php endforeach;  ?>
+        	</ul>
+        </div>
+       
+<?php } ?>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$("area[rel^='prettyPhoto']").prettyPhoto();
+	
+	$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({theme:'light_square'});
+	$(".gallery:gt(0) a[rel^='prettyPhoto']").prettyPhoto({hideflash: true});
+});
+</script>

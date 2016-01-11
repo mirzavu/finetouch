@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @category   SKJ
+ * @package    SKJ_Meetmyteam
+ * @author     Sanjeev Kumar Jha <jha.sanjeev.in@gmail.com>
+ * @website    http://www.sanjeevkumarjha.com.np
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+ -->
+<config>
+    <modules>
+        <SKJ_Meetmyteam>
+            <version>0.1.1</version>
+        </SKJ_Meetmyteam>
+    </modules>
+    <frontend>
+        <routers>
+            <meetmyteam>
+                <use>standard</use>
+                <args>
+                    <module>SKJ_Meetmyteam</module>
+                    <frontName>meetmyteam</frontName>
+                </args>
+            </meetmyteam>
+        </routers>
+        <layout>
+            <updates>
+                <meetmyteam>
+                    <file>meetmyteam.xml</file>
+                </meetmyteam>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<meetmyteam>
+				<use>admin</use>
+				<args>
+					<module>SKJ_Meetmyteam</module>
+					<frontName>meetmyteam</frontName>
+				</args>
+			</meetmyteam>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<meetmyteam module="meetmyteam">
+				<title>My Team</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="meetmyteam">
+						<title>Manage Member</title>
+						<sort_order>0</sort_order>
+						<action>meetmyteam/adminhtml_meetmyteam</action>
+					</items>
+					<cat module="meetmyteam">
+						<title>Manage category</title>
+						<sort_order>0</sort_order>
+						<action>meetmyteam/adminhtml_category</action>
+					</cat>
+				</children>
+			</meetmyteam>
+		</menu>	
+		  <acl>
+	        <resources>
+	            <admin>
+	                <children>
+	                    <meetmyteam module="meetmyteam">
+				<title>Meetmyteam</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<items module="meetmyteam">
+						<title>Manage Member</title>
+						<sort_order>0</sort_order>
+						<action>meetmyteam/adminhtml_meetmyteam</action>
+					</items>
+					<cat module="meetmyteam">
+						<title>Manage category</title>
+						<sort_order>0</sort_order>
+						<action>meetmyteam/adminhtml_category</action>
+					</cat>
+				</children>
+			</meetmyteam>
+	                </children>
+	            </admin>
+	        </resources>
+	    </acl>
+		<layout>
+			<updates>
+				<meetmyteam>
+					<file>meetmyteam.xml</file>
+				</meetmyteam>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <meetmyteam>
+                <class>SKJ_Meetmyteam_Model</class>
+                <resourceModel>meetmyteam_mysql4</resourceModel>
+            </meetmyteam>
+            <meetmyteam_mysql4>
+                <class>SKJ_Meetmyteam_Model_Mysql4</class>
+                <entities>
+                    <meetmyteam>
+                        <table>meetmyteam</table>
+                    </meetmyteam>
+                    <category>
+                        <table>meetmyteam_cat</table>
+                    </category>
+                </entities>
+            </meetmyteam_mysql4>
+        </models>
+        <resources>
+            <meetmyteam_setup>
+                <setup>
+                    <module>SKJ_Meetmyteam</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </meetmyteam_setup>
+            <meetmyteam_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </meetmyteam_write>
+            <meetmyteam_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </meetmyteam_read>
+        </resources>
+        <blocks>
+            <meetmyteam>
+                <class>SKJ_Meetmyteam_Block</class>
+            </meetmyteam>
+        </blocks>
+        <helpers>
+            <meetmyteam>
+                <class>SKJ_Meetmyteam_Helper</class>
+            </meetmyteam>
+        </helpers>
+    </global>
+</config>

@@ -1,0 +1,25 @@
+<widgets>
+    <bannerslider type="bannerslider/sliderblock" module="bannerslider" translate="name description">
+        <name>Atlas Banner Slider </name>
+        <description type="desc"></description>
+        <parameters>
+            <groupid>
+                <label>Group : </label>
+                <visible>1</visible>
+                <required>1</required>
+                <description></description>
+                <type>select</type>
+                <source_model>bannerslider/bannerslidergroup</source_model>
+            </groupid>
+            <template>
+                <required>1</required>
+                <visible>0</visible>
+                <label>Template</label>
+                <type>select</type>
+                <value>atlas/bannerslider.phtml</value>
+                <type>text</type>
+                <sort_order>100</sort_order>
+            </template>
+        </parameters>
+    </bannerslider>
+</widgets>

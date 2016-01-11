@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="top.links">
+            <action method="addLink" ifconfig="manageteamsection/manageteamgroup/toplink">
+                <label>Our Team</label>
+                <url helper="manageteam/getManageteamsUrl"/>
+                <title>Our Team</title>
+                <prepare />
+                <urlParams/>
+                <position>120</position>
+            </action>
+        </reference>
+        <reference name="top.menu">
+            <block type="manageteam/index"  template="manageteam/toplinks.phtml"/>
+        </reference>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="manageteam" ifconfig="manageteamsection/manageteamgroup/footerlink">
+                <label>Our Team</label>
+                <url helper="manageteam/getManageteamsUrl" />
+                <title>Our Team</title>
+                <prepare />
+                <urlParams/>
+                <position>120</position>
+            </action>
+        </reference>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>css/manageteam.css</name>
+            </action>
+        </reference>
+    </default>   
+    <manageteam_index_index>   
+        <reference name="root">   
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>   
+        </reference>   
+        <reference name="content">   
+            <block type="manageteam/index" name="manageteam_index" template="manageteam/index.phtml"/>   
+        </reference>   
+    </manageteam_index_index>   
+</layout>   
+	

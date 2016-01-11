@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>       
+	    <Ecomwise_Creditlimitplus>
+	        <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+				<Ecomwise_Base />
+			</depends>
+	    </Ecomwise_Creditlimitplus>  
+    </modules>
+</config>

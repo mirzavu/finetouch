@@ -1,0 +1,49 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0"> 
+<default>
+	<reference name="head">
+		<action method="addItem"><type>skin_js</type><name>hetvideo/js/jquery.min.js</name></action>
+		<action method="addItem"><type>skin_js</type><name>hetvideo/js/jquery.prettyPhoto.js</name></action>
+		<action method="addItem"><type>skin_css</type><name>hetvideo/css/prettyPhoto.css</name></action>
+		<action method="addItem"><type>skin_css</type><name>hetvideo/css/video.css</name></action>
+	</reference>
+	<reference name="footer_links">
+		<action method="addLink" translate="label title" module="video" ifconfig="hetinfoway_video/hetinfoway_vgroup/video_enable"><label>Video Gallery</label><url helper="video/data/getVideoUrl" /><title>Video Gallery</title><prepare></prepare><urlparams></urlparams><position>10</position></action>
+	</reference>
+	<reference name="top.links">
+		<!-- <action method="addLink" translate="label title" module="video" ifconfig="hetinfoway_video/hetinfoway_vgroup/video_enable"><label>Video Gallery</label><url helper="video/data/getVideoUrl" /><title>Video Gallery</title><prepare></prepare><urlparams></urlparams><position>10</position></action>-->
+	</reference>
+</default>
+	
+  <video_index_index>   
+    <reference name="root">   
+      <action method="setTemplate"><template>page/2columns-right.phtml</template></action>   
+    </reference>
+		<reference name="left">
+	<block type="video/category" name="left_category" template="video/leftcategory.phtml" />  
+	</reference>
+	<reference name="right">
+	<block type="video/category" name="left_category" template="video/leftcategory.phtml" />  
+	</reference>
+    <reference name="content"> 
+    <!-- <block type="video/category" name="category" template="video/category.phtml" /> -->
+	<block type="video/video" name="video" template="video/allvideo.phtml" />
+    <!-- <block type="video/video" name="video_featured" template="video/featured_video.phtml"/>
+    <block type="video/video" name="video_playlist" template="video/playlist_video.phtml"/>  -->
+    </reference>   
+  </video_index_index>
+	<video_category_index>
+		<reference name="root">   
+	  <action method="setTemplate"><template>page/2columns-right.phtml</template></action>   
+	</reference>  
+		<reference name="left">
+	<block type="video/category" name="left_category" template="video/leftcategory.phtml" />  
+	</reference>
+	<reference name="right">
+	<block type="video/category" name="left_category" template="video/leftcategory.phtml" />  
+	</reference>
+		<reference name="content">
+			<block type="video/video" name="video" template="video/video.phtml" />
+		</reference>
+	</video_category_index>
+</layout>

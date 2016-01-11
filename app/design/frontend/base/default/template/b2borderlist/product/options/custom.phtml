@@ -1,0 +1,44 @@
+<?php
+$_product    = $this->getProduct();
+$_options = $_product->getOptions();
+?>
+<?php 
+
+//Zend_Debug::dump( $_options );
+
+
+?>
+
+<?php foreach ($_options as $_option) { ?>
+	
+	<?php 
+	
+	//Zend_Debug::dump(  $_option->getType() );
+	
+	
+	?>
+	
+	<?php // drop down?>
+	<?php if($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_DROP_DOWN || true){ ?>	
+	<?php /* @var $this Mage_Catalog_Block_Product_View_Options_Type_Select */ ?>
+	<?php //$_option = $this->getOption() ?>
+	<dt>
+	<?php /*if($_product->getSku()=='3129' and !$_option->getIsRequire()){?>
+		<label class="required"><em>*</em><?php echo  $this->escapeHtml($_option->getTitle()) ?></label>
+	
+	<?php }else{*/?>	
+	<label<?php if ($_option['is_require']==1) echo ' class="required"' ?>><?php if ($_option['is_require']==1) echo '<em>*</em>' ?><?php echo  $this->escapeHtml($_option->getTitle()) ?></label></dt>
+	<?php //}?>
+	<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?>>
+	    <div class="input-box">
+	        <?php echo $this->getSelectValuesHtml($_option) ?>
+	        <?php if ($_option->getIsRequire()): ?>
+	            <?php if ($_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_RADIO || $_option->getType() == Mage_Catalog_Model_Product_Option::OPTION_TYPE_CHECKBOX): ?>
+	                <span id="options-<?php echo $_option->getId() ?>-container"></span>
+	            <?php endif; ?>
+	        <?php endif;?>
+	    </div>
+	</dd>	
+	<?php } ?>
+
+<?php } ?>

@@ -1,0 +1,120 @@
+/**
+ * css for my team
+ *
+ *
+ * @category   SKJ
+ * @package    SKJ_Meetmyteam
+ * @author     Sanjeev Kumar Jha <jha.sanjeev.in@gmail.com>
+ */
+
+/*======================Meet my team========================*/
+.leader_not {
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+	margin-left: -20px;
+}
+.leader_not li {
+	float:left;
+	margin-left: 20px;
+	margin-bottom: 20px;
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.photo_section {
+	
+	width: 100%;
+	margin-bottom: 10px;
+	display:block;
+}
+.photo_section img {
+	max-height: 170px;
+	max-width:150px;
+}
+.full-bio .links {
+	float:none;
+}
+.meetmyteam-detail {
+	float: left;
+	width: 100%;
+	margin-top: 30px;
+}
+
+
+
+.meetmyteam-detail img {
+	float: left;
+	margin: 0 20px 0 0;	
+	padding: 4px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.meetmyteam-detail p {
+	font-size: 14px;
+	line-height: 24px;
+}
+.detail-back {
+	color: #fff !important;
+	text-transform: uppercase;
+	display: block;
+	background: #10578d;
+	text-decoration:none;
+	font-family: 'open_sanssemibold';
+	font-size: 16px;
+	padding: 8px 9px;
+	font-style: normal;
+	float:right;
+}
+.detail-back:hover {
+	background: #36987c;
+	color: #fff !important;
+}
+.detail-back-rb {
+	color: #fff !important;
+	text-transform: uppercase;
+	display: block;
+	background: #36987c;
+	
+	font-family: 'open_sanssemibold';
+	font-size: 16px;
+	padding: 8px 9px;
+	font-style: normal;
+	float:right;
+	position:relative;
+	top:-50px;
+}
+.detail-back-rb:hover {
+	background: #10578d;
+	color: #fff !important;
+}
+
+
+
+.myteam-head {
+	padding-top: 30px;
+}
+
+.full-bio{padding: 7px 0px;}
+
+.full-bio a{ color:#36987c;}
+.full-bio a:hover{ color:#3d6277;}
+
+
+
+.leader_not .title{ font-family:Georgia, "Times New Roman", Times, serif; font-style:italic; color:#3d6277;}
+
+.leader_not .sub-heading{ font-size:13px;}
+
+.meetmyteam-detail img{ width:250px; height:283px;}
+
+

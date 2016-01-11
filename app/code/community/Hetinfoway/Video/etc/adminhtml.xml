@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<hetinfoway_video translate="title" module="video">
+											<title>Video Configuration Section</title>
+											<sort_order>0</sort_order>
+										</hetinfoway_video>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

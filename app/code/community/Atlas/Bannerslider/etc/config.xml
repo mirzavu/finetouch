@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Atlas_Bannerslider>
+            <version>1.0.1</version>
+        </Atlas_Bannerslider>
+    </modules>
+      
+    <default>
+        <bannerconfig>
+            <bannerstatus>
+                <enabled>1</enabled>
+            </bannerstatus>
+            <banneroption>
+                <banner_sort>0</banner_sort>
+                <banner_pager>0</banner_pager>
+                <thumbnail_control>0</thumbnail_control>
+                <banner_caption>0</banner_caption>
+            </banneroption>
+        </bannerconfig>
+	    
+    </default>
+    
+    <frontend>
+        <routers>
+            <bannerslider>
+                <use>standard</use>
+                <args>
+                    <module>Atlas_Bannerslider</module>
+                    <frontName>bannerslider</frontName>
+                </args>
+            </bannerslider>
+        </routers>
+        <layout>
+            <updates>
+                <bannerslider>
+                    <file>atlas/bannerslider.xml</file>
+                </bannerslider>
+            </updates>
+        </layout>
+    </frontend>
+	
+    <admin>
+        <routers>
+            <bannerslider>
+                <use>admin</use>
+                <args>
+                    <module>Atlas_Bannerslider</module>
+                    <frontName>adminbannerslider</frontName>
+                </args>
+            </bannerslider>
+        </routers>
+    </admin>
+	
+    <adminhtml>
+        <layout>
+            <updates>
+                <bannerslider>
+                    <file>Atlas/adminbannerslider.xml</file>
+                </bannerslider>
+            </updates>
+        </layout>
+   
+        <menu>
+            <general translate="title" module="general">
+               
+                <children>
+                    <bannerslider module="bannerslider">
+                        <title>Banner Slider</title>
+                        <children>
+                            <set_time>
+                                <title>Manage Image</title>
+                                <action>bannerslider/adminhtml_index</action>
+                            </set_time>
+                        </children>
+                        
+                        <children>
+                            <set_time2>                    
+                                <title>Manage Group</title>
+                                <action>bannerslider/adminhtml_group/index</action>
+                            </set_time2>
+                        </children>
+                        
+                        <children>
+                            <set_time3>                    
+                                <title>Settings</title>
+                                <action>adminhtml/system_config/edit/section/bannerconfig</action>
+                            </set_time3>
+                        </children>
+                        
+                    </bannerslider>
+                </children>
+		  
+            </general>
+        </menu>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <bannerconfig>
+                                            <title>Store Hello World Module Section</title>
+                                        </bannerconfig>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+		
+    </adminhtml>
+
+    <global>
+	
+	
+        <models>
+            <bannerslider>
+                <class>Atlas_Bannerslider_Model</class>
+                <resourceModel>bannerslider_mysql4</resourceModel>
+            </bannerslider>
+            <bannerslider_mysql4>
+                <class>Atlas_Bannerslider_Model_Mysql4</class>
+                <entities>
+                    <bannerslider>
+                        <table>atlas_bannerslider</table>
+                    </bannerslider>
+                    <bannerslidergroup>
+                        <table>atlas_bannerslidergroup</table>
+                    </bannerslidergroup>
+                    <bannerslidergrouprelation>
+                        <table>atlas_bannerslidergroup_relation</table>
+                    </bannerslidergrouprelation>			
+                    <bannerconfig>
+                        <table>atlas_bannerslider_config</table>
+                    </bannerconfig>
+                </entities>
+				
+            </bannerslider_mysql4>
+		
+		
+        </models>
+	
+        <resources>
+
+            <bannerslider_setup>
+                <setup>
+                    <module>Atlas_Bannerslider</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </bannerslider_setup>
+
+            <bannerslider_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </bannerslider_write>
+      
+            <bannerslider_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </bannerslider_read>
+        </resources>			
+				
+				
+        <blocks>
+            <bannerslider>
+                <class>Atlas_Bannerslider_Block</class>
+            </bannerslider>
+        </blocks>
+		  
+        <helpers>
+            <bannerslider>
+                <class>Atlas_Bannerslider_Helper</class>
+            </bannerslider>
+        </helpers>  
+    </global>
+
+</config>

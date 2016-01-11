@@ -1,0 +1,69 @@
+<div class="page-title">
+    <h1><?php $this->getCategoryById(); ?></h1>
+</div>
+<div>
+	<?php 
+	$id = $_GET['cat'];
+	$collection = Mage::getModel('video/category')->load($id)->getData();
+	?>
+	<?php if($collection['filename']){ ?>
+	<p><img style="height: 450px; width: 100%;" alt="<?php $this->getCategoryById(); ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$collection['filename'];?>" /> </p>
+	<?php } ?>
+	<?php
+	echo $collection['content'];
+	 ?>
+</div>
+<?php
+$collection = $this->getCollection();
+$noimage = $this->getSkinUrl('images/no-image.jpg');
+$cnt = count($collection);
+if($cnt > 0 ): 
+?><div style="position: absolute;">
+	<?php echo $this->getPagerHtml(); ?></div>
+	<div class="fleft">
+		 <?php $width = Mage::getStoreConfig('hetinfoway_video/hetinfoway_vgroup/width');
+            $height = Mage::getStoreConfig('hetinfoway_video/hetinfoway_vgroup/height'); ?>
+            <ul class="gallery clearfix">
+				<?php foreach ($collection as $item): ?>                  
+				<li>
+				<?php
+					if($item->getVimage()){ 
+                    // resize image
+                    $imageUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA). $item->getVimage();
+                  	if(!file_exists("../media/video/vimage/resized"))
+                    mkdir("../media/video/category/resized",0777);
+                    $imageName = substr(strrchr($imageUrl,"/"),1);
+                    $imageResized = Mage::getBaseDir('media').DS."video".DS."vimage".DS."resized".DS.$imageName;
+                    $dirImg = Mage::getBaseDir().str_replace("/",DS,strstr($imageUrl,'/media'));
+                    if (!file_exists($imageResized)&& file_exists($dirImg)) :
+                    $imageObj = new Varien_Image ($dirImg);
+                    $imageObj->constrainOnly(true);
+                    $imageObj->keepAspectRatio(false);
+                    $imageObj->keepFrame(false);
+                    $imageObj->quality(100);
+                    $imageObj->resize(135, 135);
+                    $imageObj->save($imageResized);
+                    endif;
+                    $newImageUrl = Mage::getBaseUrl('media')."video/vimage/resized/".$imageName;
+                   //end resize
+					}else{ $newImageUrl = $this->getSkinUrl('hetvideo/images/no-image.jpg'); }
+				   ?>
+                    	
+                        <h2><a href="http://www.youtube.com/watch?v=<?php echo $item->getVcode(); ?>" rel="prettyPhoto" title="<?php echo $item->getVname();?>"><?php $vname = $item->getVname();?><?php if (strlen($vname) > 15){ $str = substr($vname, 0, 15) . '...'; echo $str;}else{echo $vname;} ?></a></h2>
+				</li>
+				<?php endforeach;  ?> 
+			</ul>
+			</div>
+    <?php //echo $this->getPagerHtml(); ?>
+<?php else: ?>
+	<div>There is no Video here</div>
+<?php endif; ?>
+
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	$("area[rel^='prettyPhoto']").prettyPhoto();
+	
+	$(".gallery:first a[rel^='prettyPhoto']").prettyPhoto({theme:'light_square'});
+	$(".gallery:gt(0) a[rel^='prettyPhoto']").prettyPhoto({hideflash: true});
+});
+</script>

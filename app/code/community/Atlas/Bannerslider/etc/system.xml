@@ -1,0 +1,359 @@
+<config>        
+    <sections>        
+        <bannerconfig translate="label" module="bannerslider">            
+            <label>Banner Setting </label>            
+            <tab>atlas_general</tab>            
+            <frontend_type>text</frontend_type>            
+            <sort_order>1000</sort_order>            
+            <show_in_default>1</show_in_default>            
+            <show_in_website>1</show_in_website>            
+            <show_in_store>1</show_in_store>              
+            <groups>                
+                <bannerstatus translate="label">                    
+                    <label>General Setting</label>                    
+                    <frontend_type>text</frontend_type>                    
+                    <sort_order>1</sort_order>                    
+                    <show_in_default>1</show_in_default>                    
+                    <show_in_website>1</show_in_website>                    
+                    <show_in_store>1</show_in_store>                     
+                    <fields>                        
+                        <enabled translate="label comment">                            
+                            <label>Banner Enable</label>                            
+                            <comment>Enable banner slider</comment>                            
+                            <frontend_type>select</frontend_type>
+                            <value>1</value> 
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                             
+                        </enabled>                                                
+                        <jqenable translate="label comment">                            
+                            <label>Jquery Enable</label>                            
+                            <comment>Enable jquery.min.js</comment>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>adminhtml/system_config_source_yesno</source_model>                            
+                            <sort_order>11</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                             
+                        </jqenable>                                            
+                    </fields>                
+                </bannerstatus>                               
+                <banneroption translate="label">                    
+                    <label>Custom Option</label>                    
+                    <frontend_type>text</frontend_type>                    
+                    <sort_order>2</sort_order>                    
+                    <show_in_default>1</show_in_default>                    
+                    <show_in_website>1</show_in_website>                    
+                    <show_in_store>1</show_in_store>                     
+                    <fields>
+                        <banner_sort>                            
+                            <label>Enable Banner Collection Sort</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/control</source_model>                              
+                            <sort_order>21</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Suppose is enable - Then banner collection as per Banner sort</comment>                        
+                        </banner_sort>
+                        <banner_sort_type>                            
+                            <label>Banner Collection Sort Type</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/sorttype</source_model>                              
+                            <sort_order>22</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Suppose is sort enable - Need sort in ascending or descending ? </comment>
+                            <depends>                                
+                                <banner_sort>1</banner_sort>                            
+                            </depends>
+                        </banner_sort_type>
+                                                
+                        <banner_control>                            
+                            <label>Enable Control</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/control</source_model>                              
+                            <sort_order>23</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Display Navigation Arrow</comment>                        
+                        </banner_control>                        
+                        <banner_leftnav>                            
+                            <label>Image For Left Navigation</label>                            
+                            <comment>Allowed file types: jpeg, gif, png.</comment>                            
+                            <frontend_type>image</frontend_type>                            
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>                            
+                            <upload_dir config="system/filesystem/media" scope_info="1">atlas_banner</upload_dir>								                            
+                            <base_url type="media" scope_info="1">atlas_banner</base_url>                            
+                            <sort_order>24</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <depends>                                
+                                <banner_control>1</banner_control>                            
+                            </depends>                         
+                        </banner_leftnav>                        
+                        <banner_rightnav>                            
+                            <label>Image For Right Navigation</label>                            
+                            <comment>Allowed file types: jpeg, gif, png.</comment>                            
+                            <frontend_type>image</frontend_type>                            
+                            <backend_model>adminhtml/system_config_backend_image</backend_model>                            
+                            <upload_dir config="system/filesystem/media" scope_info="1">atlas_banner</upload_dir>								                            
+                            <base_url type="media" scope_info="1">atlas_banner</base_url>                            
+                            <sort_order>25</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <depends>                                
+                                <banner_control>1</banner_control>                            
+                            </depends>                         
+                        </banner_rightnav> 
+                        <banner_pager>                            
+                            <label>Pager Circle</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/pager</source_model>                              
+                            <sort_order>26</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Display Pager Circle below slider</comment>                   
+                        </banner_pager> 
+                                              
+                        <banner_pagercircle>                            
+                            <label>Pager Circle Color</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>color</validate>                            
+                            <sort_order>27</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                             
+                            <comment>Color for the Pager Circle below slider</comment>
+                            <depends>                                
+                                <banner_pager>1</banner_pager>                            
+                            </depends>  								                        
+                        </banner_pagercircle>                        
+                        <banner_pageracircle>                            
+                            <label>Pager Active Circle Color</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>color</validate>                            
+                            <sort_order>28</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Color for Active Pager Circle below slider</comment> 
+                            <depends>                                
+                                <banner_pager>1</banner_pager>                            
+                            </depends>                         
+                        </banner_pageracircle>
+
+                        
+                        <thumbnail_control>                            
+                            <label>Enable Thumbnail</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/thumbnail</source_model>                              
+                            <sort_order>29</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Display Thumbnail Below Slider - Note: Pager Circle must be enable</comment>
+                            <depends>                                
+                                <banner_pager>1</banner_pager>                            
+                            </depends>                        
+                        </thumbnail_control>
+                        <thumbnail_heightwidth>                            
+                            <label>Thumbnail Height Width</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits validate-digits-range digits-range-0-85"</validate>							                            
+                            <sort_order>30</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>								                            
+                            <comment>Specify Thumbnail Height/Width in range of 0 to 85.</comment>
+                            <depends>                                
+                                <thumbnail_control>1</thumbnail_control>                            
+                            </depends>								                        
+                        </thumbnail_heightwidth>
+                        <thumbnail_borderwith>                            
+                            <label>Thumbnail Border Width</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits validate-digits-range digits-range-0-15"</validate>							                            
+                            <sort_order>31</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>								                            
+                            <comment>Specify Thumbnail Border Width in range of 0 to 15.</comment>
+                            <depends>                                
+                                <thumbnail_control>1</thumbnail_control>                            
+                            </depends>								                        
+                        </thumbnail_borderwith>                        
+                        <thumbnail_bordercolor>                            
+                            <label>Border Color</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>color</validate>                            
+                            <sort_order>32</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>
+                            <depends>                                
+                                <thumbnail_control>1</thumbnail_control>                            
+                            </depends>                                            
+                        </thumbnail_bordercolor>
+                        <thumbnailhover_bordercolor>                            
+                            <label>Thumb Active/hover Border Color</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>color</validate>                            
+                            <sort_order>33</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>
+                            <depends>                                
+                                <thumbnail_control>1</thumbnail_control>                            
+                            </depends>                                            
+                        </thumbnailhover_bordercolor>
+                        
+                                               
+                        <banner_caption>                            
+                            <label>Image Caption</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/caption</source_model>                              
+                            <sort_order>34</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Text Display at bottom of the image</comment>                        
+                        </banner_caption>                        
+                        <banner_fontsize>                            
+                            <label>Image Caption Font Size</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits validate-digits-range digits-range-10-50"</validate>								                            
+                            <sort_order>35</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                                
+                            <comment>Size of the font for caption, specify font size between 10 to 50px</comment>		                            
+                            <depends>                                
+                                <banner_caption>1</banner_caption>                            
+                            </depends>                         
+                        </banner_fontsize>                        
+                        <banner_fontcolor>                            
+                            <label>Image Caption Font Color</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>color</validate>                            
+                            <sort_order>36</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                                 
+                            <comment>Color of the font for caption</comment>                            
+                            <depends>                                
+                                <banner_caption>1</banner_caption>                            
+                            </depends>                         
+                        </banner_fontcolor>
+                        <banner_height>                            
+                            <label>Adaptive Height</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/height</source_model>                              
+                            <sort_order>37</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>On disabling adaptive height, Slider Fix Height will be enabled.</comment>                        
+                        </banner_height>  
+                        
+                        <banner_maxheight>                            
+                            <label>Slider Max Height</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits</validate>                            
+                            <sort_order>38</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                             
+                            <comment>Max Height for the slider </comment>
+                            <depends>                                
+                                <banner_height>0</banner_height>                            
+                            </depends> 	                        
+                        </banner_maxheight> 
+                        
+                        <banner_autohover>                            
+                            <label>Pause On Hover</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/autohover</source_model>                              
+                            <sort_order>39</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                                            
+                        </banner_autohover> 			
+                                               
+                        <banner_effect>                            
+                            <label>Effect</label>                            
+                            <frontend_type>select</frontend_type>                            
+                            <source_model>bannerslider/effect</source_model>                              
+                            <sort_order>40</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                                            
+                        </banner_effect>                        
+                        <banner_speed>                            
+                            <label>Speed</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits-range digits-range-300-900</validate>                            
+                            <validate>validate-digits</validate>                            
+                            <sort_order>41</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                              
+                            <comment>Specify the Slide transition duration speed(in ms). Ex. 300 to 900.</comment>								                        
+                        </banner_speed>                        
+                        <banner_pause>                            
+                            <label>Pause Time</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits-range digits-range-2000-9000</validate>                            
+                            <validate>validate-digits</validate>                            
+                            <sort_order>42</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                               
+                            <comment>Delay time between each slide Image.(Ex. 2000-9000)</comment>                        
+                        </banner_pause>                        
+                                               
+                        <banner_maxwidth>                            
+                            <label>Slider Max Width</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits</validate>                            
+                            <sort_order>43</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                             
+                            <comment>Max Width for the slider, Leave this field blank for 100% width with responsive feature</comment>	                        
+                        </banner_maxwidth>                        
+                        
+                         
+                        				                        
+                        <banner_borderwith>                            
+                            <label>Border Width</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>validate-digits validate-digits-range digits-range-0-15"</validate>							                            
+                            <sort_order>44</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>								                            
+                            <comment>Specify Border Width in range of 0 to 15.</comment>								                        
+                        </banner_borderwith>                        
+                        <banner_bordercolor>                            
+                            <label>Border Color</label>                            
+                            <frontend_type>text</frontend_type>                            
+                            <validate>color</validate>                            
+                            <sort_order>45</sort_order>                            
+                            <show_in_default>1</show_in_default>                            
+                            <show_in_website>1</show_in_website>                            
+                            <show_in_store>1</show_in_store>                                            
+                        </banner_bordercolor> 
+                        
+                        
+                        
+                                                  
+                    </fields> 					                
+                </banneroption>            
+            </groups>        
+        </bannerconfig>    
+    </sections> 
+</config>

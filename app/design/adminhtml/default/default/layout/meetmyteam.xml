@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <meetmyteam_adminhtml_meetmyteam_index>
+        <reference name="content">
+            <block type="meetmyteam/adminhtml_meetmyteam" name="meetmyteam" />
+        </reference>
+    </meetmyteam_adminhtml_meetmyteam_index>
+    <meetmyteam_adminhtml_category_index>
+        <reference name="content">
+            <block type="meetmyteam/adminhtml_category" name="meetmyteam" />
+        </reference>
+    </meetmyteam_adminhtml_category_index>
+</layout>
