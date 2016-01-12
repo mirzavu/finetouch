@@ -42,7 +42,7 @@
 <a href="<?php echo $this->helper('checkout/cart')->getCartUrl(); ?>" data-target-element="#header-cart" class="skip-link skip-cart <?php if($_cartQty <= 0): ?> no-count<?php endif; ?>">
     <span class="icon"></span>
 	<span class="count"><?php echo $_cartQty; ?></span>
-    <span class="label"><?php echo $this->__('My Cart'); ?></span>
+    <span class="label"><?php echo $this->__('My Order'); ?></span>
     <p class="hdr-mc-subtl">$<?php echo number_format(Mage::getSingleton('checkout/session')->getQuote()->getSubtotal(), 2);  ?></p>
 </a>
 <div id="header-cart" class="block block-cart skip-content">

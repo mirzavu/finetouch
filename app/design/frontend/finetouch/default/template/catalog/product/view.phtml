@@ -49,6 +49,7 @@
             <div class="product_det">
                 <div class="product-name">
                     <h2><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
+                    <p style="color: #0D405F;"><?php echo Mage::getModel('catalog/product')->load($_product->getId())->getSku();?></p>
                 </div>
 
                 <div class="price-info">
@@ -89,10 +90,10 @@
                                 <span class="or"><?php echo $this->__('OR') ?></span>
                             <?php endif; ?>
                         <?php endif; ?>
-			<div class="social-links" style="float: right;">
+			<?php /*<div class="social-links" style="float: right;">
                         <?php echo $this->getChildHtml('addto') ?>
                         <?php echo $this->getChildHtml('sharing') ?>
-			</div>
+			</div> */?>
                     </div>
                     <?php echo $this->getChildHtml('extra_buttons') ?>
                 <?php elseif (!$_product->isSaleable()): ?>

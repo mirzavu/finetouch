@@ -41,7 +41,7 @@
         <?php if (Mage::getSingleton('customer/session')->isLoggedIn()): ?>	
 		<ul>
 		<li><a href="<?php echo Mage::getUrl('customer/account'); ?>">My Account</a></li>
-		<li><a href="<?php echo Mage::getUrl('checkout/cart') ?>">Cart</a></li>
+		<li><a href="<?php echo Mage::getUrl('checkout/cart') ?>">Order</a></li>
 		<li>
 		<a href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>"><?php echo $this->__('Logout') ?></a>
 		
