@@ -38,7 +38,7 @@
                 if($_link->name == "billing_agreements" || $_link->name == "recurring_profiles")
                     continue;
                 $customer = Mage::getSingleton('customer/session')->getCustomer();
-                if($_link->name == "address_book" && !$customer->getPrimaryBillingAddress()->getId()>0 )
+                if($_link->name == "address_book" && !$customer->getDefaultBilling() )
                     continue;
                 $_last = ($_index++ >= $_count); ?>
                 <?php if ($this->isActive($_link)): ?>
